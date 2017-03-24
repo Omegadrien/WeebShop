@@ -1,7 +1,11 @@
+///// To filter!!!
+
 var router = require('express').Router();
 var config = require('../../../../config/index');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
+var directoryId = "774724"; //delete me later!!
 
 function filterNews (info) {
     var length = info.directories.length;
@@ -25,7 +29,7 @@ function getNews (infoToReturn) {
     var request = require('request');
     var options = {
     url: 'https://samurai.ctr.shop.nintendo.net/samurai/ws/' + config.language +
-                                                  '/directories/?shop_id=1', //url that returns the directories of the home of the eShop
+                                                  '/directory/'+ directoryId +'?shop_id=1', //url that returns the content of the selected directory
     headers: {
       'Accept': 'application/json'
     }
@@ -44,7 +48,7 @@ function callback(error, response, body) {
 router.get('/', function (req, res) {
 
     getNews(function(result) {
-    res.json(filterNews(result));
+    res.json(result);
 
   });
 });
