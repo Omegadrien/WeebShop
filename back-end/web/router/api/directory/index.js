@@ -55,7 +55,6 @@ function filterDirectory (info) {
          "total" : info.directory.contents.total};
 
          var length = info.directory.contents.length;
-         var offset = info.directory.contents.offset;
 
          infoFiltered = Loop (infoFiltered, length, info);
 
