@@ -1,31 +1,86 @@
-///// To filter!!!
+//DON'T FORGET to do the offset thing :)
 
 var router = require('express').Router();
 var config = require('../../../../config/index');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-var directoryId = "774724"; //delete me later!!
+function infoFilteredLoop (data, max, info) {
 
-function filterNews (info) {
-    var length = info.directories.length;
-    var infoFiltered = {"directory": [], "length" : length};
-
-    for(var index = 0; index < length; index++){
+    for(var index = 0; index < max; index++){
         var value = {};
 
-        value["name"] = info.directories.directory[index].name;
-        value["bannerUrl"] = info.directories.directory[index].banner_url;
-        value["directoryId"] = info.directories.directory[index].id;
-        value["isFixed"] = info.directories.directory[index].standard;
-        value["isNew"] = info.directories.directory[index].new;
+        if ('title' in info.directory.contents.content[index]) { //if title
+            value["name"] = info.directory.contents.content[index].title.name;
+            value["contentId"] = info.directory.contents.content[index].title.id;
+            value["contentType"] = "game";
+            value["platformName"] = info.directory.contents.content[index].title.platform.name;
+            value["iconUrl"] = info.directory.contents.content[index].title.icon_url;
+            value["isNew"] = info.directory.contents.content[index].title.new;
+        }
+        else if ('movie' in info.directory.contents.content[index]) { //if movie
+            value["name"] = info.directory.contents.content[index].movie.name;
+            value["contentId"] = info.directory.contents.content[index].movie.id;
+            value["contentType"] = "movie";
+            value["iconUrl"] = info.directory.contents.content[index].movie.thumbnail_url;
+            value["movieUrl"] = info.directory.contents.content[index].movie.files.file[0].movie_url;
+            value["isNew"] = info.directory.contents.content[index].movie.new;
+        }
+        else {
+            value["contentType"] = "unknow";
+        }
 
-        infoFiltered["directory"].push(value);
+        data["content"].push(value);
     }
+    return data;
+}
+
+function filterDirectory (info) {
+
+    var infoFiltered;
+    var description = "";
+
+    if ('description' in info.directory) {
+        description = info.directory.description;
+    }
+
+    if ('length' in info.directory.contents && 'offset' in info.directory.contents) {
+
+        infoFiltered = {"directoryName" : info.directory.name,
+        "directoryBannerUrl" : info.directory.banner_url,
+        "description" : description,
+         "content": [],
+         "length" : info.directory.contents.length,
+         "offset" : info.directory.contents.offset,
+         "total" : info.directory.contents.total};
+
+         var length = info.directory.contents.length;
+         var offset = info.directory.contents.offset;
+
+         infoFiltered = Loop (infoFiltered, length, info);
+
+    }
+
+    else {
+
+        var total = info.directory.contents.total;
+
+        infoFiltered = {"directoryName" : info.directory.name,
+        "directoryBannerUrl" : info.directory.banner_url,
+        "description" : description,
+         "content": [],
+         "total" : info.directory.contents.total};
+
+         var length = info.directory.contents.length;
+         var offset = info.directory.contents.offset;
+
+         infoFiltered = infoFilteredLoop (infoFiltered, total, info);
+    }
+
     return infoFiltered;
 };
 
-function getNews (infoToReturn) {
+function getDirectory (directoryId, infoToReturn) {
     var request = require('request');
     var options = {
     url: 'https://samurai.ctr.shop.nintendo.net/samurai/ws/' + config.language +
@@ -45,10 +100,10 @@ function callback(error, response, body) {
   request(options, callback);
 };
 
-router.get('/', function (req, res) {
+router.get('/:param', function (req, res) {
 
-    getNews(function(result) {
-    res.json(result);
+    getDirectory(req.params.param, function(result) {
+    res.json(filterDirectory(result));
 
   });
 });

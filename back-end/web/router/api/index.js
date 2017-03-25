@@ -5,6 +5,7 @@ router.use('/newsMessage', require('./news/message.js'));
 
 router.use('/directory', require('./directory/index.js'));
 
-router.use('/getTitleID', require('./getTitleID/index.js'));
+//router.use('/game', require('./game/index.js'));
+router.use('/download', require('./download/index.js'));
 
 module.exports = router;
