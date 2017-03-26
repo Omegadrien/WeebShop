@@ -4,12 +4,13 @@ var config = require('../../../../config/index');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 function filterGameList (info) {
-    var infoFiltered = {"content": [],
-    "length" : info.contents.length,
-    "offset" : info.contents.offset,
-    "total" : info.contents.total};
 
     var length = info.contents.length;
+
+    var infoFiltered = {"content": [],
+    "length" : length,
+    "offset" : info.contents.offset,
+    "total" : info.contents.total};
 
     for(var index = 0; index < length; index++){
         var value = {};
@@ -26,16 +27,16 @@ function filterGameList (info) {
     return infoFiltered;
 };
 
-function getGameList (offset, word, sort, priceMin, priceMax, before, infoToReturn) {
+function getGameList (offset, word, sort, priceMin, priceMax, genre, publisher, platform, infoToReturn) {
     var request = require('request');
 
     var url = 'https://samurai.ctr.shop.nintendo.net/samurai/ws/' + config.language + '/titles?shop_id=1';
 
-    if (typeof offset !== 'undefined') {
+    if (typeof offset != 'undefined') {
         url += "&offset=" + offset;
     }
 
-    if (typeof word !== 'undefined') {
+    if (typeof word != 'undefined') {
         url += "&freeword=" + word;
     }
 
@@ -43,19 +44,25 @@ function getGameList (offset, word, sort, priceMin, priceMax, before, infoToRetu
         url += "&sort=" + sort;
     }
 
-    if (priceMin !== 'undefined') {
+    if (typeof priceMin != 'undefined') {
         url += "&price_min=" + priceMin;
     }
 
-    if (priceMax !== 'undefined') {
+    if (typeof priceMax != 'undefined') {
         url += "&price_max=" + priceMax;
     }
 
-    if (before !== 'undefined') {
-        url += "&release_date_before=+" + before;
+    if (typeof genre != 'undefined') { // "https://samurai.ctr.shop.nintendo.net/samurai/ws/{region}/genres" to have a human readable list of genres by id.
+        url += "&genre[]=" + genre;
     }
 
-    console.log(url);
+    if (typeof publisher != 'undefined') { // "https://samurai.ctr.shop.nintendo.net/samurai/ws/{region}/publishers" to have a human readable list of publishers by id.
+        url += "&publisher[]=" + publisher;
+    }
+
+    if (typeof platform != 'undefined') { // "https://samurai.ctr.shop.nintendo.net/samurai/ws/{region}/platforms" to have a human readable list of platforms by id.
+        url += "&platform[]=" + platform;
+    }
 
     var options = {
     url: url,
@@ -81,13 +88,12 @@ router.get('/', function (req, res) {
     var sort = req.query.sort;
     var priceMin = req.query.priceMin;
     var priceMax = req.query.priceMax;
-    var before = req.query.before;
+    var genre = req.query.genre;
+    var publisher = req.query.publisher;
+    var platform = req.query.platform;
 
-    console.log(priceMin);
-
-    getGameList(offset, word, sort, priceMin, priceMax, before, function(result) {
+    getGameList(offset, word, sort, priceMin, priceMax, genre, publisher, platform, function(result) {
         res.json(filterGameList(result));
-
   });
 });
 
