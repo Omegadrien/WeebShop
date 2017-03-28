@@ -56,7 +56,7 @@ function filterDirectory (info) {
 
          var length = info.directory.contents.length;
 
-         infoFiltered = Loop (infoFiltered, length, info);
+         infoFiltered = infoFilteredLoop (infoFiltered, length, info);
 
     }
 
