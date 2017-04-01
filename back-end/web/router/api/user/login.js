@@ -1,3 +1,5 @@
+//For later, bcrypt.compareSync("TextPassword", hash); Returns true or false
+
 var router = require('express').Router();
 var bodyParser = require('body-parser');
 var _ = require("lodash");
@@ -6,8 +8,9 @@ var passport = require("passport");
 var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
-var config = require('../../../config/index.js');
+var config = require('../../../../config/index.js');
 
+//Will be replaced with MongoDB
 var users = [
   {
     id: 1,
