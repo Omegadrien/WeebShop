@@ -15,9 +15,11 @@ router.post('/', function(req, res) {
     var password = req.body.password;
     var hashedPassword = hash.hashPassword(password);
 
-    var gameList = req.body.gameList;
+    var gameList = [];
 
     var newUser = new User({
+        isAdmin: false,
+        isActivated: true,
         username: username,
         email: email,
         password: hashedPassword,
