@@ -19,7 +19,7 @@ var strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
 
     User.findOne({_id: jwt_payload.id}, function(err, user) {
         if (! user) {
-            return console.log("error");
+            res.status(401).json({message:"error, id not found"});
         }
         if (user) {
             next(null, user);
@@ -52,10 +52,15 @@ router.post("/", function(req, res) {
       }
 
       if (bcrypt.compareSync(req.body.password, user.password)) {
-          // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
-          var payload = {id: user.id};
-          var token = jwt.sign(payload, jwtOptions.secretOrKey);
-          res.json({message: "ok", token: token});
+          if (user.isActivated) {
+              // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
+              var payload = {id: user.id};
+              var token = jwt.sign(payload, jwtOptions.secretOrKey);
+              res.json({message: "ok", token: token});
+          }
+          else {
+              res.status(401).json({message:"error, account deleted"});
+          }
       }
       else {
           res.status(401).json({message:"passwords did not match"});
