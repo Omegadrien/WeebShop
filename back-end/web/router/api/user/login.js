@@ -15,21 +15,25 @@ jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader();
 jwtOptions.secretOrKey = config.secretKey;
 
 var strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
-  console.log('payload received', jwt_payload);
-  // usually this would be a database call:
-  var user = users[_.findIndex(users, {id: jwt_payload.id})];
-  if (user) {
-    next(null, user);
-  } else {
-    next(null, false);
-  }
+    console.log('payload received', jwt_payload);
+
+    User.findOne({_id: jwt_payload.id}, function(err, user) {
+        if (! user) {
+            return console.log("error");
+        }
+        if (user) {
+            next(null, user);
+        } else {
+            next(null, false);
+        }
+    });
 });
 
 passport.use(strategy);
 
 router.use(passport.initialize());
 
-// parse application/x-www-form-urlencoded, easier testing with Postman or plain HTML forms
+// parse application/x-www-form-urlencoded, easier testing with Postman / plain HTML forms
 router.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -40,8 +44,8 @@ router.post("/", function(req, res) {
     var password = req.body.password;
   }
 
-  // get the user
-  User.findOne({ username: name }, function(user) {
+  // get the user to verify the username & password
+  User.findOne({ username: name }, function(err, user) {
       if (! user ) {
           res.status(401).json({message:"no such user found"});
           return;
@@ -56,7 +60,6 @@ router.post("/", function(req, res) {
       else {
           res.status(401).json({message:"passwords did not match"});
       }
-
   });
 });
 

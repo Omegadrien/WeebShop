@@ -15,7 +15,7 @@ var options = {
 app.use(bodyParser.json());
 app.use("/", require("./web/index.js"));
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT;
 
 https.createServer(options, app).listen(port, function() {
     console.log(`App runnning on port: ${port}`);
