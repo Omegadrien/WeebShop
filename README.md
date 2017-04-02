@@ -34,3 +34,27 @@ You can add some parameters:
 
 So, for example, you can use that URL if you look for a Mario game that costs between 5 and 50€, and you can buy physically:
 https://localhost:3000/api/games?word=mario&minPrice=5&maxPrice=50&platform=103
+
+### Register a user
+
+https://localhost:3000/api/user/register -> post with x-www-form-urlencoded data:
+"username" (needed), "password" (needed) and "email" (optional).
+
+### Login a user
+
+https://localhost:3000/api/user/login -> post with x-www-form-urlencoded data:
+"name" (the username of the user), "password" (the password of the user).
+
+If the name and the password are OK, you will receive a token.
+
+### Access secret with the token
+
+Add in the header "Authorization : JWT {token}".
+
+https://localhost:3000/api/user/secret/ -> let you notice that your token is OK.
+
+https://localhost:3000/api/user/secret/gameList -> Returns the list of games that the user have bookmarked.
+
+https://localhost:3000/api/user/secret/gameList/add -> post the "name" and "id" (contentId) of the game you want to add to the list.
+
+https://localhost:3000/api/user/secret/gameList/remove -> post the "id" of the game you want to remove from the list.
