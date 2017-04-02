@@ -6,6 +6,10 @@ You can check games information (images, description, videos, etc), and download
 You need to place the ctr-common-1.crt and ctr-common-1.key files in the back-end/keys folder.
 Follow these instructions to get those files: https://github.com/SciresM/ccrypt
 
+You also need MongoDB to run (you can edit the configuration in the config/index.js file).
+
+Use `npm install` to install automatically the node_modules files.
+
 ## How to use the back-end
 
 https://localhost:3000/api/news -> News. Directories of the home of the shop.
@@ -53,8 +57,18 @@ Add in the header "Authorization : JWT {token}".
 
 https://localhost:3000/api/user/secret/ -> let you notice that your token is OK.
 
+#### Game list
+
 https://localhost:3000/api/user/secret/gameList -> Returns the list of games that the user have bookmarked.
 
 https://localhost:3000/api/user/secret/gameList/add -> post the "name" and "id" (contentId) of the game you want to add to the list.
 
 https://localhost:3000/api/user/secret/gameList/remove -> post the "id" of the game you want to remove from the list.
+
+### Admin features
+
+You can only do these things if you're using an admin account (the "isAdmin" bool is set to true in the database).
+
+https://localhost:3000/api/user/secret/admin/getUserList -> get the list of users stored in the database.
+
+https://localhost:3000/api/user/secret/admin/deleteUser -> post the "id" of the user you want to disable the account (set the bool isActivated to false). The account will be blocked during the login.

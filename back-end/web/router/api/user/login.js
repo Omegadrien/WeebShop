@@ -15,7 +15,6 @@ jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader();
 jwtOptions.secretOrKey = config.secretKey;
 
 var strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
-    console.log('payload received', jwt_payload);
 
     User.findOne({_id: jwt_payload.id}, function(err, user) {
         if (! user) {
