@@ -1,5 +1,3 @@
-//For later, bcrypt.compareSync("TextPassword", hash); Returns true or false
-
 var router = require('express').Router();
 var bodyParser = require('body-parser');
 var _ = require("lodash");
@@ -9,20 +7,8 @@ var passportJWT = require("passport-jwt");
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
 var config = require('../../../../config/index.js');
-
-//Will be replaced with MongoDB
-var users = [
-  {
-    id: 1,
-    name: 'jonathanmh',
-    password: '%2yx4'
-  },
-  {
-    id: 2,
-    name: 'test',
-    password: 'test'
-  }
-];
+var User = require('../../../../models/User.js');
+var bcrypt = require('bcrypt');
 
 var jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeader();
@@ -43,8 +29,7 @@ passport.use(strategy);
 
 router.use(passport.initialize());
 
-// parse application/x-www-form-urlencoded
-// for easier testing with Postman or plain HTML forms
+// parse application/x-www-form-urlencoded, easier testing with Postman or plain HTML forms
 router.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -54,20 +39,25 @@ router.post("/", function(req, res) {
     var name = req.body.name;
     var password = req.body.password;
   }
-  // usually this would be a database call:
-  var user = users[_.findIndex(users, {name: name})];
-  if( ! user ){
-    res.status(401).json({message:"no such user found"});
-  }
 
-  if(user.password === req.body.password) {
-    // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
-    var payload = {id: user.id};
-    var token = jwt.sign(payload, jwtOptions.secretOrKey);
-    res.json({message: "ok", token: token});
-  } else {
-    res.status(401).json({message:"passwords did not match"});
-  }
+  // get the user
+  User.findOne({ username: name }, function(user) {
+      if (! user ) {
+          res.status(401).json({message:"no such user found"});
+          return;
+      }
+
+      if (bcrypt.compareSync(req.body.password, user.password)) {
+          // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
+          var payload = {id: user.id};
+          var token = jwt.sign(payload, jwtOptions.secretOrKey);
+          res.json({message: "ok", token: token});
+      }
+      else {
+          res.status(401).json({message:"passwords did not match"});
+      }
+
+  });
 });
 
 module.exports = router;
