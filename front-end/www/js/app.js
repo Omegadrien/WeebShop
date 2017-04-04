@@ -22,3 +22,25 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+.config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+
+    $stateProvider
+        .state('home', {
+            url:"/",
+            templateUrl:'templates/home.html'
+        })
+        .state('settings', {
+            url: '/settings',
+            templateUrl: 'templates/settings.html'
+        })
+        .state('directory', {
+            url: '/directory/:id',
+            templateUrl: 'templates/directory.html'
+        })
+        .state('otherwise', {
+            url: '/',
+            templateUrl: 'templates/home.html'
+        })
+
+})

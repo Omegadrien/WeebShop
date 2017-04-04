@@ -1,0 +1,14 @@
+<ion-view>
+    <ion-content>
+        <ion-list ng-controller="DirectoryController">
+            <ion-item ng-repeat="n in [].constructor(directory.content.length) track by $index">
+                <a class="item item-avatar" href="#">
+                    <h1>{{ directory.content[$index].name }}</h1>
+                    <img src="{{directory.content[$index].iconUrl}}">
+                    <p>Platform : {{directory.content[$index].platformName}}</p>
+                    <button class="button button-positive">More info</button>
+                </a>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

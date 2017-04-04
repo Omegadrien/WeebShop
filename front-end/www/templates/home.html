@@ -1,0 +1,21 @@
+<ion-view>
+    <ion-content>
+        <ion-list ng-controller="HomeController">
+            <div ng-repeat="n in [].constructor(home.directory.length) track by $index">
+                <div class="col">
+                <a class="item col-center">
+                    <div class="col item-text-wrap">
+                        <h2 >{{ home.directory[$index].name }}</h2>
+                    </div>
+                    <div class="col">
+                        <img  src="{{home.directory[$index].bannerUrl}}" class="responsive-sm">
+                    </div>
+                    <div class="col">
+                        <button class="button button-positive" ng-click="buttonClicked(home.directory[$index].directoryId)" ui-sref="directory">More info</button>
+                    </div>
+                </a>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>
