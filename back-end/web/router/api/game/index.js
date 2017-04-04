@@ -1,4 +1,4 @@
-//To filter... /!\
+//Improve the filter...
 
 var router = require('express').Router();
 var config = require('../../../../config/index');
@@ -6,20 +6,32 @@ var config = require('../../../../config/index');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 function filterGameInfo (info) {
-    var length = info.directories.length;
-    var infoFiltered = {"directory": [], "length" : length};
 
-    for(var index = 0; index < length; index++){
-        var value = {};
+    var infoFiltered = {"game": []};
 
-        value["name"] = info.directories.directory[index].name;
-        value["bannerUrl"] = info.directories.directory[index].banner_url;
-        value["directoryId"] = info.directories.directory[index].id;
-        value["isFixed"] = info.directories.directory[index].standard;
-        value["isNew"] = info.directories.directory[index].new;
+    var value = {};
 
-        infoFiltered["directory"].push(value);
+    value["name"] = info.title.formal_name;
+    value["description"] = info.title.description;
+    value["numberOfPlayers"] = info.title.number_of_players;
+    value["copyrightedText"] = info.title.copyright.text;
+    value["downloadSize"] = info.title.data_size;
+    value["platform"] = info.title.platform.name;
+    value["publisher"] = info.title.publisher.name;
+    value["displayGenre"] = info.title.display_genre;
+    value["ratingInfoIcon"] = info.title.rating_info.rating.icons;
+    value["ratingInfoDescriptor"] = info.title.rating_info.descriptors.descriptor;
+    value["starRatingInfo"] = {"score" : info.title.star_rating_info.score, "vote" : info.title.star_rating_info.votes}
+    value["releaseDate"] = info.title.release_date_on_eshop;
+    value["inAppPurchase"] = info.title.in_app_purchase;
+    value["isNew"] = info.title.new;
+
+    infoFiltered["game"].push(value);
+
+    if (typeof info.title.movies != 'undefined') {
+        infoFiltered["game"].push({"movie" : info.title.movies.movie});
     }
+
     return infoFiltered;
 };
 
@@ -45,10 +57,9 @@ function callback(error, response, body) {
 
 router.get('/:param', function (req, res) {
 
-
     getGameInfo(req.params.param, function(result) {
-        res.json(result);
-    //res.json(filterGameInfo(result));
+        //res.json(result);
+        res.json(filterGameInfo(result));
 
   });
 });
