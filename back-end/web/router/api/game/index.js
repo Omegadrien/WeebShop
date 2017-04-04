@@ -27,7 +27,7 @@ function getGameInfo (contentId, infoToReturn) {
     var request = require('request');
     var options = {
     url: 'https://samurai.ctr.shop.nintendo.net/samurai/ws/' + config.language +
-        '/title/' + contentId + '?shop_id=1', //url that returns game informations
+        '/title/' + contentId, //url that returns game informations
     headers: {
       'Accept': 'application/json'
     }

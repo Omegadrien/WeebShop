@@ -1,14 +1,29 @@
 <ion-view>
     <ion-content>
         <ion-list ng-controller="DirectoryController">
-            <ion-item ng-repeat="n in [].constructor(directory.content.length) track by $index">
-                <a class="item item-avatar" href="#">
-                    <h1>{{ directory.content[$index].name }}</h1>
-                    <img src="{{directory.content[$index].iconUrl}}">
-                    <p>Platform : {{directory.content[$index].platformName}}</p>
-                    <button class="button button-positive">More info</button>
-                </a>
-            </ion-item>
+            <h2>{{ directory.directoryName }}</h2>
+            <img  src="{{directory.directoryBannerUrl}}" class="responsive-sm">
+            <div ng-repeat="n in [].constructor(directory.content.length) track by $index">
+                <div class="col">
+                    <a class="item col-center">
+                        <div class="col item-text-wrap">
+                            <h2 >{{ directory.content[$index].name }}</h2>
+                        </div>
+
+                        <div class = "row">
+                            <div class="col">
+                                <img  src="{{directory.content[$index].iconUrl}}" class="responsive-sm">
+                            </div>
+                            <div ng-show="directory.content[$index].contentType == 'game'" class="col col-30 item-text-wrap">
+                                <p>{{directory.content[$index].platformName}}</p>
+                            </div>
+                            <div ng-show="directory.content[$index].contentType == 'game'" class="col col-20">
+                                <button class="button button-positive">See</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </ion-list>
     </ion-content>
 </ion-view>
