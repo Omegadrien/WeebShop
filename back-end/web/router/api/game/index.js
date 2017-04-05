@@ -4,12 +4,12 @@ var config = require('../../../../config/index');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 function brRemover (text) {
-    return text.replace(/&lt;br&gt;/g," ");;
+    return text.replace(/&lt;br&gt;/g," ");
 }
 
 function filterGameInfo (info) {
 
-    ///// genres
+    // genres
     var genreInfo = [];
     for (var genreIndex = 0; genreIndex < info.title.genres.genre.length; genreIndex++) {
         var genreValue = {};
@@ -17,46 +17,12 @@ function filterGameInfo (info) {
         genreInfo.push(genreValue);
     }
 
-    /// languages
+    // languages
     var languageInfo = [];
     for (var languageIndex = 0; languageIndex < info.title.languages.language.length; languageIndex++) {
         var languageValue = {};
         languageValue["name"] = info.title.languages.language[languageIndex].name;
         languageInfo.push(languageValue);
-    }
-
-    /// features
-    if (typeof info.title.features != 'undefined') {
-        var featureInfo = [];
-        for (var featureIndex = 0; featureIndex < info.title.features.feature.length; featureIndex++) {
-            var featureValue = {};
-            featureValue["name"] = info.title.features.feature[featureIndex].name;
-            featureInfo.push(featureValue);
-        }
-    }
-
-    /// screenshots
-    if (typeof info.title.screenshots != 'undefined') {
-        var screenshotInfo = [];
-        for (var screenshotIndex = 0; screenshotIndex < info.title.screenshots.screenshot.length; screenshotIndex++) {
-            var screenshotValue = {};
-            screenshotValue["upper"] = info.title.screenshots.screenshot[screenshotIndex].image_url[0].value;
-            screenshotValue["lower"] = info.title.screenshots.screenshot[screenshotIndex].image_url[1].value;
-            screenshotInfo.push(screenshotValue);
-        }
-    }
-
-    /// movies
-    if (typeof info.title.movies != 'undefined') {
-        var movieInfo = [];
-
-        for (var videoIndex = 0; videoIndex < info.title.movies.movie.length; videoIndex++ ) {
-            var movieValue = {};
-            movieValue["name"] = info.title.movies.movie[videoIndex].name;
-            movieValue["bannerUrl"] = info.title.movies.movie[videoIndex].banner_url;
-            movieValue["videoUrl"] = info.title.movies.movie[videoIndex].files.file[0].movie_url;
-            movieInfo.push(movieValue);
-        }
     }
 
     var infoFiltered = {};
@@ -77,10 +43,43 @@ function filterGameInfo (info) {
     infoFiltered["inAppPurchase"] = info.title.in_app_purchase;
     infoFiltered["isNew"] = info.title.new;
 
-    // Optional
-    infoFiltered["feature"] = featureInfo;
-    infoFiltered["screenshotUrl"] = screenshotInfo;
-    infoFiltered["movie"] = movieInfo;
+    /// Optional data
+
+    // features
+    if (typeof info.title.features != 'undefined') {
+        var featureInfo = [];
+        for (var featureIndex = 0; featureIndex < info.title.features.feature.length; featureIndex++) {
+            var featureValue = {};
+            featureValue["name"] = info.title.features.feature[featureIndex].name;
+            featureInfo.push(featureValue);
+        }
+        infoFiltered["feature"] = featureInfo;
+    }
+
+    // screenshots
+    if (typeof info.title.screenshots != 'undefined') {
+        var screenshotInfo = [];
+        for (var screenshotIndex = 0; screenshotIndex < info.title.screenshots.screenshot.length; screenshotIndex++) {
+            var screenshotValue = {};
+            screenshotValue["upper"] = info.title.screenshots.screenshot[screenshotIndex].image_url[0].value;
+            screenshotValue["lower"] = info.title.screenshots.screenshot[screenshotIndex].image_url[1].value;
+            screenshotInfo.push(screenshotValue);
+        }
+        infoFiltered["screenshotUrl"] = screenshotInfo;
+    }
+
+    // movies
+    if (typeof info.title.movies != 'undefined') {
+        var movieInfo = [];
+        for (var videoIndex = 0; videoIndex < info.title.movies.movie.length; videoIndex++ ) {
+            var movieValue = {};
+            movieValue["name"] = info.title.movies.movie[videoIndex].name;
+            movieValue["bannerUrl"] = info.title.movies.movie[videoIndex].banner_url;
+            movieValue["videoUrl"] = info.title.movies.movie[videoIndex].files.file[0].movie_url;
+            movieInfo.push(movieValue);
+        }
+        infoFiltered["movie"] = movieInfo;
+    }
 
     return infoFiltered;
 };
