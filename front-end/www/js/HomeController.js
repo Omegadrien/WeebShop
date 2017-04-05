@@ -17,11 +17,9 @@ angular.module('starter')
             })
         });
 
-
     $scope.buttonClicked = function (directoryId) {
         console.log(directoryId);
-        $location.path('/directory/'+directoryId);
-        //console.log("lol" + index);
+        $location.path('/directory/'+ directoryId);
     }
 
 })

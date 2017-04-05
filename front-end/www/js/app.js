@@ -38,6 +38,10 @@ angular.module('starter', ['ionic'])
             url: '/directory/:id',
             templateUrl: 'templates/directory.html'
         })
+        .state('game', {
+            url: '/game/:id',
+            templateUrl: 'templates/game.html'
+        })
         .state('otherwise', {
             url: '/',
             templateUrl: 'templates/home.html'

@@ -1,14 +1,14 @@
 angular.module('starter')
-.controller('DirectoryController', function($scope, $http, $ionicLoading, $stateParams, $location) {
+.controller('GameController', function($scope, $http, $ionicLoading, $stateParams) {
 
     $ionicLoading.show({
         template:'<ion-spinner icon="spiral"></ion-spinner>',
     }).then(function() {
         $http({
-            url: "/api/directory/"+$stateParams.id,
+            url: "/api/game/"+$stateParams.id,
             method: "GET"
         }).then(function success (response) {
-            $scope.directory = response.data;
+            $scope.game = response.data;
             $ionicLoading.hide().then(function(){
                //console.log("The loading indicator is now hidden");
             });
@@ -16,10 +16,5 @@ angular.module('starter')
 
         })
     });
-
-    $scope.buttonClicked = function (contentId) {
-        console.log("contentId=" + contentId);
-        $location.path('/game/' + contentId);
-    }
 
 })

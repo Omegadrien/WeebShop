@@ -18,7 +18,7 @@
                                 <p>{{directory.content[$index].platformName}}</p>
                             </div>
                             <div ng-show="directory.content[$index].contentType == 'game'" class="col col-20">
-                                <button class="button button-positive">See</button>
+                                <button class="button button-positive" ng-click="buttonClicked(directory.content[$index].contentId)" ui-sref="game">See</button>
                             </div>
                         </div>
                     </a>

@@ -1,0 +1,32 @@
+<ion-view>
+    <ion-content>
+        <ion-list ng-controller="GameController">
+            <h2>{{ game.name }}</h2>
+            <p>{{ game.description }}</p>
+            <p>
+                Genre:
+                <div ng-repeat ="n in [].constructor(game.genre.length) track by $index">
+                    {{game.genre[$index].name}} <br />
+                </div>
+            </p>
+
+            <p>
+                Language:
+                <div ng-repeat ="n in [].constructor(game.language.length) track by $index">
+                    {{game.language[$index].name}} <br />
+                </div>
+            </p>
+
+            <p>
+                Feature:
+                <div ng-repeat ="n in [].constructor(game.feature.length) track by $index">
+                    {{game.feature[$index].name}} <br />
+                </div>
+            </p>
+
+            <p>
+
+            </p>
+        </ion-list>
+    </ion-content>
+</ion-view>
