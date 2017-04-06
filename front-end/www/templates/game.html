@@ -1,26 +1,38 @@
+<!-- Optional : language, rating info icon, star rating, feature, screenshots, movies   -->
 <ion-view>
     <ion-content>
         <ion-list ng-controller="GameController">
-            <h2>{{ game.name }}</h2>
+
+            <div class="row">
+                <div class="col col-67" class="responsive-sm">
+                    <h3>{{ game.name }}</h3>
+                </div>
+                <div class="col">
+                    <img src="{{ game.iconUrl }}" class="responsive-sm">
+                </div>
+            </div>
+            <button class="button button-stable">Download</button>
+
+
             <p>{{ game.description }}</p>
             <p>
                 Genre:
                 <div ng-repeat ="n in [].constructor(game.genre.length) track by $index">
-                    {{game.genre[$index].name}} <br />
+                    • {{game.genre[$index].name}} <br />
                 </div>
             </p>
 
             <p>
                 Language:
                 <div ng-repeat ="n in [].constructor(game.language.length) track by $index">
-                    {{game.language[$index].name}} <br />
+                    • {{game.language[$index].name}} <br />
                 </div>
             </p>
 
             <p>
                 Feature:
                 <div ng-repeat ="n in [].constructor(game.feature.length) track by $index">
-                    {{game.feature[$index].name}} <br />
+                    • {{game.feature[$index].name}} <br />
                 </div>
             </p>
 

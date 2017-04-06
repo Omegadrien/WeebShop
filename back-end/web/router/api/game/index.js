@@ -3,8 +3,11 @@ var config = require('../../../../config/index');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-function brRemover (text) {
-    return text.replace(/&lt;br&gt;/g," ");
+function brRemover (text) { // remove"<br/>", "<br/><br>", "\n"
+    //return text.replace(/&lt;br&gt;/g," ");
+    text = text.split('<br>').join('');
+    text = text.split('<br/>').join('');
+    return text;
 }
 
 function filterGameInfo (info) {
@@ -17,17 +20,9 @@ function filterGameInfo (info) {
         genreInfo.push(genreValue);
     }
 
-    // languages
-    var languageInfo = [];
-    for (var languageIndex = 0; languageIndex < info.title.languages.language.length; languageIndex++) {
-        var languageValue = {};
-        languageValue["name"] = info.title.languages.language[languageIndex].name;
-        languageInfo.push(languageValue);
-    }
-
     var infoFiltered = {};
 
-    infoFiltered["name"] = info.title.formal_name;
+    infoFiltered["name"] = brRemover(info.title.formal_name);
     infoFiltered["description"] = brRemover(info.title.description);
     infoFiltered["genre"] = genreInfo;
     infoFiltered["language"] = languageInfo;
@@ -36,14 +31,34 @@ function filterGameInfo (info) {
     infoFiltered["downloadSize"] = info.title.data_size;
     infoFiltered["platform"] = info.title.platform.name;
     infoFiltered["publisher"] = info.title.publisher.name;
-    infoFiltered["ratingInfoIconUrl"] = info.title.rating_info.rating.icons.icon[0].url;
-    infoFiltered["starRatingInfo"] = {"score" : info.title.star_rating_info.score,
-                                "numberVote" : info.title.star_rating_info.votes}
     infoFiltered["releaseDate"] = info.title.release_date_on_eshop;
     infoFiltered["inAppPurchase"] = info.title.in_app_purchase;
     infoFiltered["isNew"] = info.title.new;
 
     /// Optional data
+    infoFiltered["iconUrl"] = info.title.icon_url;
+
+    // language
+    if (typeof info.title.languages != 'undefined') {
+        var languageInfo = [];
+        for (var languageIndex = 0; languageIndex < info.title.languages.language.length; languageIndex++) {
+            var languageValue = {};
+            languageValue["name"] = info.title.languages.language[languageIndex].name;
+            languageInfo.push(languageValue);
+        }
+        infoFiltered["language"] = languageInfo;
+    }
+
+    // rating info icons
+    if (typeof info.title.rating_info != 'undefined') {
+        infoFiltered["ratingInfoIconUrl"] = info.title.rating_info.rating.icons.icon[0].url;
+    }
+
+    // star rating
+    if (typeof info.title.star_rating_info != 'undefined') {
+        infoFiltered["starRatingInfo"] = {"score" : info.title.star_rating_info.score,
+                                    "numberVote" : info.title.star_rating_info.votes}
+    }
 
     // features
     if (typeof info.title.features != 'undefined') {
