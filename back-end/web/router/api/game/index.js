@@ -27,7 +27,7 @@ function filterGameInfo (info) {
     infoFiltered["genre"] = genreInfo;
     infoFiltered["language"] = languageInfo;
     infoFiltered["numberOfPlayers"] = info.title.number_of_players;
-    infoFiltered["copyrightedText"] = info.title.copyright.text;
+    infoFiltered["copyrightedText"] = brRemover(info.title.copyright.text);
     infoFiltered["downloadSize"] = info.title.data_size;
     infoFiltered["platform"] = info.title.platform.name;
     infoFiltered["publisher"] = info.title.publisher.name;

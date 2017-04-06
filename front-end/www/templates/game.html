@@ -11,10 +11,31 @@
                     <img src="{{ game.iconUrl }}" class="responsive-sm">
                 </div>
             </div>
-            <button class="button button-stable">Download</button>
 
+            <div class="row">
+                <button class="button button-stable col col-50" ng-click="goToDownloadPage()">Download</button>
+                <div class="col col-center">
+                    <p style="text-align: center">Price: {{ price }}</p>
+                    <p style="text-align: center">Download size: {{ game.downloadSize / (1024*1024) | number:2 }} MB</p>
+                </div>
+            </div>
 
-            <p>{{ game.description }}</p>
+            <div class="row">
+                <div class="col col-33">
+                    <img class="col col-center" src="{{ game.screenshotUrl[0].upper }}" class="responsive-sm">
+                    <img class="col col-center" src="{{ game.screenshotUrl[0].lower }}" class="responsive-sm">
+                </div>
+                <div class="col col-33">
+                    <img class="col col-center" src="{{ game.screenshotUrl[1].upper }}" class="responsive-sm">
+                    <img class="col col-center" src="{{ game.screenshotUrl[1].lower }}" class="responsive-sm">
+                </div>
+                <div class="col col-33">
+                    <img class="col col-center" src="{{ game.screenshotUrl[2].upper }}" class="responsive-sm">
+                    <img class="col col-center" src="{{ game.screenshotUrl[2].lower }}" class="responsive-sm">
+                </div>
+            </div>
+
+            <p class="col col-center">{{ game.description }}</p>
             <p>
                 Genre:
                 <div ng-repeat ="n in [].constructor(game.genre.length) track by $index">
@@ -36,9 +57,20 @@
                 </div>
             </p>
 
-            <p>
+            <p>Number of players: {{ game.numberOfPlayers }}</p>
 
-            </p>
+            <p>Platform: {{  game.platform}}</p>
+
+            <p>Publisher: {{ game.publisher }}</p>
+
+            <p>Release date on the eShop: {{ game.releaseDate }}</p>
+
+            <p>Contains in app purchase: {{ game.inAppPurchase }}</p>
+
+            <img class="responsive-sm" src="{{ game.ratingInfoIconUrl }}">
+
+            <p>{{ game.copyrightedText }}</p>
+
         </ion-list>
     </ion-content>
 </ion-view>

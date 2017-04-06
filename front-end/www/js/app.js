@@ -22,8 +22,9 @@ angular.module('starter', ['ionic'])
     }
   });
 })
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
     $urlRouterProvider.otherwise('/');
+    $ionicConfigProvider.tabs.position('bottom');
 
     $stateProvider
         .state('home', {

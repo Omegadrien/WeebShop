@@ -21,7 +21,15 @@ function getPrice (contentID, infoToReturn) {
 function callback(error, response, body) {
     if (!error && response.statusCode == 200) {
         var info = JSON.parse(body);
-        infoToReturn(info.online_prices.online_price[0].price.regular_price.amount);
+        if (info.online_prices.online_price[0].eshop_sales_status == "onsale") {
+            infoToReturn(info.online_prices.online_price[0].price.regular_price.amount);
+        }
+        else if (info.online_prices.online_price[0].eshop_sales_status == "unreleased") {
+            infoToReturn(info.online_prices.online_price[0].tentative_price.amount);
+        }
+        else {
+            infoToReturn("???");
+        }
     }
 };
 
