@@ -2,3 +2,11 @@
 .responsive-sm{
         max-width: 100%;
 }
+
+.ionic_ratings .read_only {
+    pointer-events:none !important;
+  }
+
+  .ionic_ratings .icon {
+   font-size: 200%;
+ }

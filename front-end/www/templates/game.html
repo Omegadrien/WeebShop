@@ -16,9 +16,21 @@
                 <button class="button button-stable col col-50" ng-click="goToDownloadPage()">Download</button>
                 <div class="col col-center">
                     <p style="text-align: center">Price: {{ price }}</p>
-                    <p style="text-align: center">Download size: {{ game.downloadSize / (1024*1024) | number:2 }} MB</p>
+                    <p style="text-align: center">Size: {{ game.downloadSize / (1024*1024) | number:2 }} MB</p>
                 </div>
             </div>
+
+            <div class="row" ng-show="showRating">
+                <div class="col col-50">
+                    <ionic-ratings ratingsobj='ratingsObject' index='0'></ionic-ratings>
+                </div>
+                <div class="col col-center">
+                    <p>Score: {{ game.starRatingInfo.score * 20 | number:0 }}%</p>
+                    <p>Votes: {{ game.starRatingInfo.numberVote }}</p>
+                </div>
+            </div>
+
+
 
             <div class="row">
                 <div class="col col-33">
