@@ -5,7 +5,7 @@
 
             <div class="row">
                 <div class="col col-67" class="responsive-sm">
-                    <h3>{{ game.name }}</h3>
+                    <h3 ng-bind-html="game.name"></h3>
                 </div>
                 <div class="col">
                     <img src="{{ game.iconUrl }}" class="responsive-sm">
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <p class="col col-center">{{ game.description }}</p>
+            <p class="col col-center" ng-bind-html="game.description"></p>
             <p>
                 Genre:
                 <div ng-repeat ="n in [].constructor(game.genre.length) track by $index">
@@ -81,7 +81,7 @@
 
             <img class="responsive-sm" src="{{ game.ratingInfoIconUrl }}">
 
-            <p>{{ game.copyrightedText }}</p>
+            <p ng-bind-html="game.copyrightedText"></p>
 
         </ion-list>
     </ion-content>

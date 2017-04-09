@@ -3,13 +3,6 @@ var config = require('../../../../config/index');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-function brRemover (text) { // remove"<br/>", "<br/><br>", "\n"
-    //return text.replace(/&lt;br&gt;/g," ");
-    text = text.split('<br>').join('');
-    text = text.split('<br/>').join('');
-    return text;
-}
-
 function filterGameInfo (info) {
 
     // genres
@@ -22,12 +15,12 @@ function filterGameInfo (info) {
 
     var infoFiltered = {};
 
-    infoFiltered["name"] = brRemover(info.title.formal_name);
-    infoFiltered["description"] = brRemover(info.title.description);
+    infoFiltered["name"] = info.title.formal_name;
+    infoFiltered["description"] = info.title.description;
     infoFiltered["genre"] = genreInfo;
     infoFiltered["language"] = languageInfo;
     infoFiltered["numberOfPlayers"] = info.title.number_of_players;
-    infoFiltered["copyrightedText"] = brRemover(info.title.copyright.text);
+    infoFiltered["copyrightedText"] = info.title.copyright.text;
     infoFiltered["downloadSize"] = info.title.data_size;
     infoFiltered["platform"] = info.title.platform.name;
     infoFiltered["publisher"] = info.title.publisher.name;
