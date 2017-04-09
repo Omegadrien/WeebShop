@@ -1,6 +1,6 @@
 <ion-view>
     <ion-content>
-        <ion-list ng-controller="HomeController">
+        <ion-list ng-controller="HomeController" ng-show="showElements">
             <div ng-repeat="n in [].constructor(home.directory.length) track by $index">
                 <div class="col">
                 <a class="item col-center">

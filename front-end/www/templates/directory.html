@@ -1,6 +1,6 @@
 <ion-view>
     <ion-content>
-        <ion-list ng-controller="DirectoryController">
+        <ion-list ng-controller="DirectoryController" ng-show="showElements">
             <h2>{{ directory.directoryName }}</h2>
             <img  src="{{directory.directoryBannerUrl}}" class="responsive-sm">
             <div ng-repeat="n in [].constructor(directory.content.length) track by $index">

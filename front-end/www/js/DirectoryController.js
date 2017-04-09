@@ -1,6 +1,8 @@
 angular.module('starter')
 .controller('DirectoryController', function($scope, $http, $ionicLoading, $stateParams, $location) {
 
+    $scope.showElements = false;
+
     $ionicLoading.show({
         template:'<ion-spinner icon="spiral"></ion-spinner>',
     }).then(function() {
@@ -9,9 +11,8 @@ angular.module('starter')
             method: "GET"
         }).then(function success (response) {
             $scope.directory = response.data;
-            $ionicLoading.hide().then(function(){
-               //console.log("The loading indicator is now hidden");
-            });
+            $scope.showElements = true;
+            $ionicLoading.hide();
         }, function fail(response) {
 
         })

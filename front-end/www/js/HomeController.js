@@ -1,6 +1,8 @@
 angular.module('starter')
 .controller('HomeController', function($scope, $http, $ionicLoading, $location) {
 
+    $scope.showElements = false;
+
     $ionicLoading.show({
           template: '<ion-spinner icon="spiral"></ion-spinner>',
         }).then(function(){
@@ -9,9 +11,9 @@ angular.module('starter')
                 method: "GET"
             }).then(function success (response) {
                 $scope.home = response.data;
-                $ionicLoading.hide().then(function(){
-                   //console.log("The loading indicator is now hidden");
-                });
+                $scope.showElements = true;
+                $ionicLoading.hide();
+                
             }, function fail(response) {
 
             })

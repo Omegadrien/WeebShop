@@ -31,6 +31,10 @@ angular.module('starter', ['ionic', 'ionic-ratings'])
             url:"/",
             templateUrl:'templates/home.html'
         })
+        .state('search', {
+            url:'/search',
+            templateUrl: 'templates/search.html'
+        })
         .state('settings', {
             url: '/settings',
             templateUrl: 'templates/settings.html'

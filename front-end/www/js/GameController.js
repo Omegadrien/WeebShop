@@ -1,6 +1,7 @@
 angular.module('starter')
 .controller('GameController', function($scope, $http, $ionicLoading, $stateParams, $q) {
 
+    $scope.showElements = false;
     $scope.showRating = false;
 
     $ionicLoading.show({
@@ -41,10 +42,8 @@ angular.module('starter')
         });
 
         $q.all([reqGame, reqPrice, reqDownload]).then( function() {
-            $ionicLoading.hide().then(function(){
-               //console.log("The loading indicator is now hidden");
-            });
-
+            $scope.showElements = true;
+            $ionicLoading.hide();
         });
 
     });
