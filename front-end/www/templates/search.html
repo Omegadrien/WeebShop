@@ -1,7 +1,110 @@
+<!-- Publisher, Price (Free ~ No limits), reset search criteria, search button -->
 <ion-view>
     <ion-content>
         <ion-list ng-controller="SearchController">
-            Search
+            <h2>Search</h2>
+
+            <!-- keyword -->
+            <div class="list">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Keywords</span>
+                    <input type="text" placeholder="Search by keywords">
+                </label>
+            </div>
+
+            <!-- Platform -->
+            <div class="list">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Platform
+                    </div>
+                    <select>
+                        <option selected>All</option>
+                        <option>3DS Retail Only</option>
+                        <option>3DS Download Only</option>
+                        <option>DSiWare</option>
+                        <option>Game Boy</option>
+                        <option>Game Boy Color</option>
+                        <option>NES</option>
+                        <option>Game Gear</option>
+                        <option>Downloadable Video</option>
+                        <option>3DS Retail/Download</option>
+                        <option>New 3DS Download Only</option>
+                        <option>New 3DS Retail/Download</option>
+                        <option>Super NES</option>
+                    </select>
+                </label>
+            </div>
+
+            <!-- Genre -->
+            <div class="list">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Genres
+                    </div>
+                    <select>
+                        <option selected>All</option>
+                        <option>Arcade</option>
+                        <option>Action</option>
+                        <option>Adventure</option>
+                        <option>Fighting</option>
+                        <option>Puzzle</option>
+                        <option>Racing</option>
+                        <option>RPG</option>
+                        <option>Simulation</option>
+                        <option>Sports</option>
+                        <option>Shooter</option>
+                        <option>Board Game</option>
+                        <option>Strategy</option>
+                        <option>First-Person Shooter</option>
+                        <option>Education</option>
+                        <option>Platformer</option>
+                        <option>Other</option>
+                        <option>Training</option>
+                        <option>Study</option>
+                        <option>Practical</option>
+                        <option>Communication</option>
+                        <option>Music</option>
+                        <option>Utility</option>
+                        <option>Lifestyle</option>
+                        <option>Multiplayer</option>
+                        <option>Video</option>
+                    </select>
+                </label>
+            </div>
+
+            <!-- Publisher -->
+            <div class="list">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Publisher
+                    </div>
+                    <select> <!-- To many publisher (+150), i have to find another solution xD -->
+                        <option selected>All</option>
+                        <option>Nintendo</option>
+                        <option>12-21 Kurokawa</option>
+                        <option>13AM Games</option>
+                        <option>1st Playable</option>
+                        <option>2K Games</option>
+                        <option>4Pockets.com</option>
+                        <option>505 Games</option>
+                        <option>Abylight</option>
+                        <option>Activision</option>
+                        <option>AGATSUMA</option>
+                        <option>AGENIUS</option>
+                        <option>Agetec</option>
+                        <option>Aksys Games</option>
+                        <option>Arait</option>
+                        <option>ARC SYSTEM WORKS</option>
+                        <option>ASK Co., Ltd.</option>
+                        <option>Assoria</option>
+                        <option>Atooi</option>
+                        <option>BANDAI NAMCO Entertainment</option>
+
+                    </select>
+                </label>
+            </div>
+
         </ion-list>
     </ion-content>
 </ion-view>

@@ -34,9 +34,9 @@ You can add some parameters:
 - priceMax : maximum price of the game
 - genre : (for example, 3 = action, 8 = RPG)
 - publisher : (Nintendo is "190")
-- platform : (Nintendo 3DS cart and download games is "103")
+- platform : (Nintendo 3DS retail/download games is "103")
 
-So, for example, you can use that URL if you look for a Mario game that costs between 5 and 50€, and you can buy physically:
+So, for example, you can use that URL if you look for a Mario game that costs between 5 and 50, and you can buy on the eShop:
 https://localhost:3000/api/games?word=mario&minPrice=5&maxPrice=50&platform=103
 
 ### Register a user
