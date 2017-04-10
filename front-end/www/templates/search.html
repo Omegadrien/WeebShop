@@ -7,8 +7,8 @@
             <!-- keyword -->
             <div class="list">
                 <label class="item item-input item-floating-label">
-                    <span class="input-label">Keywords</span>
-                    <input type="text" placeholder="Search by keywords">
+                    <span class="input-label">Keywords:</span>
+                    <input type="text" placeholder="Search games by keywords">
                 </label>
             </div>
 
@@ -40,7 +40,7 @@
             <div class="list">
                 <label class="item item-input item-select">
                     <div class="input-label">
-                        Genres
+                        Genre
                     </div>
                     <select>
                         <option selected>All</option>
@@ -79,27 +79,14 @@
                     <div class="input-label">
                         Publisher
                     </div>
-                    <select> <!-- To many publisher (+150), i have to find another solution xD -->
+                    <select>
                         <option selected>All</option>
-                        <option>Nintendo</option>
-                        <option>12-21 Kurokawa</option>
-                        <option>13AM Games</option>
-                        <option>1st Playable</option>
-                        <option>2K Games</option>
-                        <option>4Pockets.com</option>
-                        <option>505 Games</option>
-                        <option>Abylight</option>
-                        <option>Activision</option>
-                        <option>AGATSUMA</option>
-                        <option>AGENIUS</option>
-                        <option>Agetec</option>
-                        <option>Aksys Games</option>
-                        <option>Arait</option>
-                        <option>ARC SYSTEM WORKS</option>
-                        <option>ASK Co., Ltd.</option>
-                        <option>Assoria</option>
-                        <option>Atooi</option>
-                        <option>BANDAI NAMCO Entertainment</option>
+                        <div>
+                            <option ng-value="{{ publishers.publisher[$index].id }}"
+                                ng-repeat="n in [].constructor(publishers.publisher.length) track by $index">
+                                {{ publishers.publisher[$index].name }}
+                            </option>
+                        </div>
 
                     </select>
                 </label>

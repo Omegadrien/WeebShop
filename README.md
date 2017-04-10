@@ -16,6 +16,8 @@ https://localhost:3000/api/news -> News. Directories of the home of the shop.
 
 https://localhost:3000/api/newsMessage -> News message. It's just the text that scrolls on the home of the shop.
 
+https://localhost:3000/api/publishersList -> Get the list of publishers.
+
 https://localhost:3000/api/directory/{directoryId} -> Directory content.
 
 https://localhost:3000/api/game/{contentId} -> Information about a game.

@@ -8,6 +8,8 @@ router.use('/game/price', require('./game/price.js'));
 router.use('/games', require('./search/index.js'));
 router.use('/download', require('./download/index.js'));
 
+router.use('/publishersList', require('./publishers/index.js'));
+
 router.use('/user', require('./user/index.js'));
 
 module.exports = router;

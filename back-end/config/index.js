@@ -1,9 +1,19 @@
 var dotenv = require('dotenv');
 var mongoose = require('mongoose');
 
-var language = "FR";
+function createSecretKey(size)
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~!@#$%^&*()-_=+[]{};:,.<>/?";
 
-var secretKey = "]rP/!sTWjDlB9%2h9A:lG>" //yeah!
+    for( var i=0; i < size; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+}
+
+
+var language = "FR";
+var secretKey = createSecretKey(32); //yeah!
 
 dotenv.config();
 
