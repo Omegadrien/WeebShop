@@ -1,4 +1,4 @@
-<!-- Publisher, Price (Free ~ No limits), reset search criteria, search button -->
+<!-- Price (Free ~ No limits), reset search criteria, search button -->
 <ion-view>
     <ion-content>
         <ion-list ng-controller="SearchController">
@@ -90,6 +90,28 @@
 
                     </select>
                 </label>
+            </div>
+
+            <!-- Prices -->
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Minimum price</span>
+                    <input type="text" maxlength="2" placeholder="Free">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Maximum price</span>
+                    <input type="text" maxlength="2" placeholder="No limits">
+                </label>
+            </div>
+
+            <!-- Send & reset buttons - Doesn't work for now... -->
+            <div class="row">
+                <div class="col" style="text-align: center;">
+                    <button class="button button-stable">Reset the criteria</button>
+                </div>
+                <div class="col" style="text-align: center;">
+                    <button class="button button-calm">Start the search</button>
+                </div>
             </div>
 
         </ion-list>
