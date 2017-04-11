@@ -8,7 +8,7 @@
             <div class="list">
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Keywords:</span>
-                    <input type="text" placeholder="Search games by keywords">
+                    <input ng-model="keywordSelect" type="text" placeholder="Search games by keywords">
                 </label>
             </div>
 
@@ -18,20 +18,20 @@
                     <div class="input-label">
                         Platform
                     </div>
-                    <select>
-                        <option selected>All</option>
-                        <option>3DS Retail Only</option>
-                        <option>3DS Download Only</option>
-                        <option>DSiWare</option>
-                        <option>Game Boy</option>
-                        <option>Game Boy Color</option>
-                        <option>NES</option>
-                        <option>Game Gear</option>
-                        <option>Downloadable Video</option>
-                        <option>3DS Retail/Download</option>
-                        <option>New 3DS Download Only</option>
-                        <option>New 3DS Retail/Download</option>
-                        <option>Super NES</option>
+                    <select ng-init="platformSelect='0'" ng-model="platformSelect">
+                        <option value="0">All</option>
+                        <option value="18">3DS Retail Only</option>
+                        <option value="19">3DS Download Only</option>
+                        <option value="20">DSiWare</option>
+                        <option value="21">Game Boy</option>
+                        <option value="22">Game Boy Color</option>
+                        <option value="24">NES</option>
+                        <option value="25">Game Gear</option>
+                        <option value="43">Downloadable Video</option>
+                        <option value="103">3DS Retail/Download</option>
+                        <option value="1001">New 3DS Download Only</option>
+                        <option value="1002">New 3DS Retail/Download</option>
+                        <option value="1004">Super NES</option>
                     </select>
                 </label>
             </div>
@@ -42,33 +42,33 @@
                     <div class="input-label">
                         Genre
                     </div>
-                    <select>
-                        <option selected>All</option>
-                        <option>Arcade</option>
-                        <option>Action</option>
-                        <option>Adventure</option>
-                        <option>Fighting</option>
-                        <option>Puzzle</option>
-                        <option>Racing</option>
-                        <option>RPG</option>
-                        <option>Simulation</option>
-                        <option>Sports</option>
-                        <option>Shooter</option>
-                        <option>Board Game</option>
-                        <option>Strategy</option>
-                        <option>First-Person Shooter</option>
-                        <option>Education</option>
-                        <option>Platformer</option>
-                        <option>Other</option>
-                        <option>Training</option>
-                        <option>Study</option>
-                        <option>Practical</option>
-                        <option>Communication</option>
-                        <option>Music</option>
-                        <option>Utility</option>
-                        <option>Lifestyle</option>
-                        <option>Multiplayer</option>
-                        <option>Video</option>
+                    <select ng-init="genreSelect='0'" ng-model="genreSelect">
+                        <option value="0">All</option>
+                        <option value="2">Arcade</option>
+                        <option value="3">Action</option>
+                        <option value="4">Adventure</option>
+                        <option value="5">Fighting</option>
+                        <option value="6">Puzzle</option>
+                        <option value="7">Racing</option>
+                        <option value="8">RPG</option>
+                        <option value="9">Simulation</option>
+                        <option value="10">Sports</option>
+                        <option value="11">Shooter</option>
+                        <option value="12">Board Game</option>
+                        <option value="13">Strategy</option>
+                        <option value="14">First-Person Shooter</option>
+                        <option value="15">Education</option>
+                        <option value="16">Platformer</option>
+                        <option value="17">Other</option>
+                        <option value="61">Training</option>
+                        <option value="81">Study</option>
+                        <option value="82">Practical</option>
+                        <option value="84">Communication</option>
+                        <option value="85">Music</option>
+                        <option value="86">Utility</option>
+                        <option value="88">Lifestyle</option>
+                        <option value="92">Multiplayer</option>
+                        <option value="94">Video</option>
                     </select>
                 </label>
             </div>
@@ -79,10 +79,10 @@
                     <div class="input-label">
                         Publisher
                     </div>
-                    <select>
-                        <option selected>All</option>
+                    <select ng-init="publisherSelect='0'" ng-model="publisherSelect">
+                        <option value="0">All</option>
                         <div>
-                            <option ng-value="{{ publishers.publisher[$index].id }}"
+                            <option value="{{ publishers.publisher[$index].id }}"
                                 ng-repeat="n in [].constructor(publishers.publisher.length) track by $index">
                                 {{ publishers.publisher[$index].name }}
                             </option>
@@ -94,23 +94,44 @@
 
             <!-- Prices -->
             <div class="list">
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Minimum price</span>
-                    <input type="text" maxlength="2" placeholder="Free">
-                </label>
-                <label class="item item-input item-stacked-label">
-                    <span class="input-label">Maximum price</span>
-                    <input type="text" maxlength="2" placeholder="No limits">
-                </label>
+                <div class="row">
+                    <div class="col col-50">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Minimum price</span>
+                            <input ng-model="minPriceSelect" type="text" maxlength="2" placeholder="Free">
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label class="item item-input item-stacked-label">
+                            <span class="input-label">Maximum price</span>
+                            <input ng-model="maxPriceSelect" type="text" maxlength="2" placeholder="No limits">
+                        </label>
+                    </div>
+                </div>
             </div>
+
+            <h4>Sort by:</h4>
+            <!-- Sort "new", "popular" or "score, "alphabetical"-->
+            <ion-list>
+                <div class="row">
+                    <div class="col col-50">
+                        <ion-radio ng-init="sortSelect='alphabetical'" ng-model="sortSelect" value="alphabetical">Alphabetical</ion-radio>
+                        <ion-radio ng-model="sortSelect" value="new">New</ion-radio>
+                    </div>
+                    <div class="col">
+                        <ion-radio ng-model="sortSelect" value="popular">Popular</ion-radio>
+                        <ion-radio ng-model="sortSelect" value="score">Score</ion-radio>
+                    </div>
+                </div>
+            </ion-list>
 
             <!-- Send & reset buttons - Doesn't work for now... -->
             <div class="row">
                 <div class="col" style="text-align: center;">
-                    <button class="button button-stable">Reset the criteria</button>
+                    <button ng-click="resetButtonClicked()" class="button button-stable">Reset the criteria</button>
                 </div>
                 <div class="col" style="text-align: center;">
-                    <button class="button button-calm">Start the search</button>
+                    <button ng-click="startSearchButtonClicked()" class="button button-calm">Start the search</button>
                 </div>
             </div>
 

@@ -47,6 +47,10 @@ angular.module('starter', ['ionic', 'ionic-ratings'])
             url: '/game/:id',
             templateUrl: 'templates/game.html'
         })
+        .state('gameList', {
+            url: '/gameList/:id',
+            templateUrl: 'templates/gameList.html'
+        })
         .state('otherwise', {
             url: '/',
             templateUrl: 'templates/home.html'
