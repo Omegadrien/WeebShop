@@ -113,12 +113,13 @@
             <!-- Sort "new", "popular" or "score, "alphabetical"-->
             <ion-list>
                 <div class="row">
-                    <div class="col col-50">
-                        <ion-radio ng-init="sortSelect='alphabetical'" ng-model="sortSelect" value="alphabetical">Alphabetical</ion-radio>
-                        <ion-radio ng-model="sortSelect" value="new">New</ion-radio>
+                    <div class="col col-25">
+                        <ion-radio ng-init="sortSelect='new'" ng-model="sortSelect" value="new">New</ion-radio>
                     </div>
-                    <div class="col">
+                    <div class="col col-35">
                         <ion-radio ng-model="sortSelect" value="popular">Popular</ion-radio>
+                    </div>
+                    <div class="col col">
                         <ion-radio ng-model="sortSelect" value="score">Score</ion-radio>
                     </div>
                 </div>

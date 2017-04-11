@@ -1,6 +1,9 @@
 angular.module('starter')
 .controller('GameListController', function($scope, $http, $ionicLoading, $stateParams, $location) {
 
+    $scope.offset = 0;
+    $scope.total = 0;
+
     $scope.showElements = false;
 
     $ionicLoading.show({
@@ -11,6 +14,8 @@ angular.module('starter')
             method: "GET"
         }).then(function success (response) {
             $scope.games = response.data;
+            $scope.offset = $scope.games.offset;
+            $scope.total = $scope.games.total; 
             $scope.showElements = true;
             $ionicLoading.hide();
         }, function fail(response) {

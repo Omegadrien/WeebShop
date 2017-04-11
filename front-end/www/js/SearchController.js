@@ -18,7 +18,7 @@ angular.module('starter')
         $scope.keywordSelect="";
         $scope.minPriceSelect="";
         $scope.maxPriceSelect="";
-        $scope.sortSelect="alphabetical";
+        $scope.sortSelect="new";
     }
 
     $scope.startSearchButtonClicked = function() {
