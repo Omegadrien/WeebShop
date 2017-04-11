@@ -7,10 +7,10 @@ angular.module('starter')
         template:'<ion-spinner icon="spiral"></ion-spinner>',
     }).then(function() {
         $http({
-            url: "/api/games/"+$stateParams.id,
+            url: "/api/games"+$stateParams.id,
             method: "GET"
         }).then(function success (response) {
-            $scope.directory = response.data;
+            $scope.games = response.data;
             $scope.showElements = true;
             $ionicLoading.hide();
         }, function fail(response) {

@@ -20,7 +20,6 @@ function filterGameInfo (info) {
     infoFiltered["genre"] = genreInfo;
     infoFiltered["language"] = languageInfo;
     infoFiltered["numberOfPlayers"] = info.title.number_of_players;
-    infoFiltered["copyrightedText"] = info.title.copyright.text;
     infoFiltered["downloadSize"] = info.title.data_size;
     infoFiltered["platform"] = info.title.platform.name;
     infoFiltered["publisher"] = info.title.publisher.name;
@@ -30,6 +29,11 @@ function filterGameInfo (info) {
 
     /// Optional data
     infoFiltered["iconUrl"] = info.title.icon_url;
+
+    // copyright
+    if (typeof info.title.copyright != 'undefined') {
+        infoFiltered["copyrightedText"] = info.title.copyright.text;
+    }
 
     // language
     if (typeof info.title.languages != 'undefined') {

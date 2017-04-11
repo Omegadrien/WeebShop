@@ -19,7 +19,7 @@ function filterGameList (info) {
             value["name"] = info.contents.content[index].title.name;
             value["contentId"] = info.contents.content[index].title.id;
             value["iconUrl"] = info.contents.content[index].title.icon_url;
-
+            value["platformName"] = info.contents.content[index].title.platform.name;
         }
 
         infoFiltered["content"].push(value);

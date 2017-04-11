@@ -18,7 +18,7 @@ angular.module('starter')
         $scope.keywordSelect="";
         $scope.minPriceSelect="";
         $scope.maxPriceSelect="";
-
+        $scope.sortSelect="alphabetical";
     }
 
     $scope.startSearchButtonClicked = function() {
@@ -78,8 +78,7 @@ angular.module('starter')
         else {
             $location.path('/gameList/');
         }
-        console.log(url);
-        
+
     }
 
 })
