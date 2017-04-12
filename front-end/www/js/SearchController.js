@@ -54,7 +54,7 @@ angular.module('starter')
         }
 
         //max price
-        if (parseInt($scope.maxPriceSelect)) {
+        if (parseInt($scope.maxPriceSelect) || parseInt($scope.maxPriceSelect) == 0) {
             var number = parseInt($scope.maxPriceSelect);
             if (number >= 0) {
                 url += "&priceMax=" + number;
@@ -68,16 +68,9 @@ angular.module('starter')
 
                 url += "&sort=" + $scope.sortSelect;
         }
-        console.log($scope.sortSelect);
 
         //send url
-        if (url != "") {
-            url = "?" + url.substr(1, url.length-1);
-            $location.path('/gameList/' + url);
-        }
-        else {
-            $location.path('/gameList/');
-        }
+        $location.path('/gameList/' + url);
 
     }
 

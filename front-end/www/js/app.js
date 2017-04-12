@@ -48,7 +48,7 @@ angular.module('starter', ['ionic', 'ionic-ratings'])
             templateUrl: 'templates/game.html'
         })
         .state('gameList', {
-            url: '/gameList/:id',
+            url: '/gameList/:url',
             templateUrl: 'templates/gameList.html'
         })
         .state('otherwise', {

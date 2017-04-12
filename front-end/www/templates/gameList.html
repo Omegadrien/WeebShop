@@ -1,7 +1,9 @@
 <ion-view>
     <ion-content>
         <ion-list ng-controller="GameListController" ng-show="showElements">
+
             <h2>gameList</h2>
+
             <div ng-repeat="n in [].constructor(games.content.length) track by $index">
                 <div class="col">
                     <a class="item col-center">
@@ -23,6 +25,15 @@
                     </a>
                 </div>
             </div>
+
         </ion-list>
+
+        <!-- ng-if="moreDataCanBeLoaded()" icon="ion-loading-c" -->
+        <ion-infinite-scroll
+            ng-if="true"
+            on-infinite="loadMoreData()"
+            distance="10%">
+         </ion-infinite-scroll>
+
     </ion-content>
 </ion-view>
