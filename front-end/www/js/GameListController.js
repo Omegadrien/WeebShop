@@ -1,23 +1,20 @@
 angular.module('starter')
-.controller('GameListController', function($scope, $http, $ionicLoading, $stateParams, $location) {
-
-    //uncomment
-    // http://codepen.io/elm/pen/Becqp
-    // http://ionicframework.com/docs/v1/api/directive/ionInfiniteScroll/
-
-    $scope.offset = 0;
-    $scope.total = 0;
+.controller('GameListController', function($scope, $http, $ionicLoading, $stateParams, $location, $q) {
 
     $scope.showElements = false;
+    $scope.games = {};
+    $scope.gamesContentBefore = [];
 
-    var getGamesInfo = function(offset) {
+    var getGamesList = function(offset) {
         $http({
             url: "/api/games?offset=" + offset + $stateParams.url,
             method: "GET"
         }).then(function success (response) {
             $scope.games = response.data;
-            $scope.offset = $scope.games.offset;
-            $scope.total = $scope.games.total;
+
+            //inject games before
+            $scope.games.content = $scope.gamesContentBefore.concat($scope.games.content);
+
             $scope.showElements = true;
             $ionicLoading.hide();
         }, function fail(response) {
@@ -25,18 +22,16 @@ angular.module('starter')
         })
     }
 
-
     $ionicLoading.show({
         template:'<ion-spinner icon="spiral"></ion-spinner>',
-    }).then(getGamesInfo($scope.offset));
+    }).then(getGamesList(0));
 
     $scope.buttonClicked = function (contentId) {
         $location.path('/game/' + contentId);
     }
 
-
     $scope.moreDataCanBeLoaded = function () {
-        if ($scope.offset + $scope.games.length < $scope.total) {
+        if ($scope.showElements && $scope.games.content.length + $scope.games.length < $scope.games.total) {
             return true;
         }
         else {
@@ -45,10 +40,16 @@ angular.module('starter')
     }
 
     $scope.loadMoreData = function() {
-        console.log("bottom reached. Load more..");
-        $scope.offset += $scope.games.length;
-        getGamesInfo($scope.offset);
-        $scope.$broadcast('scroll.infiniteScrollComplete');
+        $scope.gamesContentBefore = $scope.games.content;
+
+        setTimeout(function(){ //setTimeout to 1s, to display the loading when loading ionInfiniteScroll
+            $q.all([getGamesList($scope.games.content.length + $scope.games.length)]).then( function() {
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            });
+        }, 1000);
+
+
+
     }
 
 })
