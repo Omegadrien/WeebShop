@@ -2,11 +2,27 @@
     <ion-content ng-controller="CheckLoginController">
         <ion-list ng-controller="SettingsController">
             <h2>Settings</h2>
-            <p>
-                Token: {{ token }}
-            </p>
-
             <button ng-click="logoutButtonClicked()">Log out</button>
+
+            <h3>BookMarked</h3>
+
+            <div ng-if="listGames.length == 0">
+                <p>Empty</p>
+            </div>
+
+            <div ng-repeat="n in [].constructor(listGames.length) track by $index">
+                <div class="col">
+                    <a class="item col-center">
+                        <div class="col item-text-wrap">
+                            <h2 ng-bind-html="listGames[$index][0]" ></h2>
+                        </div>
+
+                        <button class="button button-positive" ng-click="buttonClicked(listGames[$index][1])" ui-sref="game">See</button>
+
+                    </a>
+                </div>
+            </div>
+
         </ion-list>
     </ion-content>
 </ion-view>
