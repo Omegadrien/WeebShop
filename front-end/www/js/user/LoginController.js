@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('LoginController', function($scope, $http, $ionicLoading, $location, sessionService) {
+.controller('LoginController', function($scope, $http, $location, sessionService) {
 
     var login = function() {
         $http({
@@ -19,6 +19,10 @@ angular.module('starter')
 
     $scope.loginButtonClicked = function() {
         login();
+    }
+
+    $scope.registerGoButtonClicked = function() {
+        $location.path('/register');
     }
 
 })

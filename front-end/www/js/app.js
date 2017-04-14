@@ -49,6 +49,10 @@ return {
             url:'/login',
             templateUrl: 'templates/user/login.html'
         })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'templates/user/register.html'
+        })
         .state('search', {
             url:'/search',
             templateUrl: 'templates/search.html'
