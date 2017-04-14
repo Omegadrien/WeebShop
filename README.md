@@ -43,16 +43,16 @@ https://localhost:3000/api/games?word=mario&minPrice=5&maxPrice=50&platform=103
 
 ### Register a user
 
-https://localhost:3000/api/user/register -> post with x-www-form-urlencoded data:
+https://localhost:3000/api/user/register -> post with json data:
 "username" (needed), "password" (needed) and "email" (optional).
 
 https://localhost:3000/api/user/register/checkUsername -> get true or false, depending if the username is already used.
-For example, use the url: "https://localhost:3000/api/user/register/checkUsername?name=admin" to check if admin is already used.
+For example, use the url: "https://localhost:3000/api/user/register/checkUsername?username=admin" to check if admin is already used.
 
 ### Login a user
 
-https://localhost:3000/api/user/login -> post with x-www-form-urlencoded data:
-"name" (the username of the user), "password" (the password of the user).
+https://localhost:3000/api/user/login -> post with json data:
+"username" (the username of the user), "password" (the password of the user).
 
 If the name and the password are OK, you will receive a token.
 

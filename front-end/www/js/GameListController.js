@@ -12,7 +12,6 @@ angular.module('starter')
         }).then(function success (response) {
             $scope.games = response.data;
 
-            //inject games before
             $scope.games.content = $scope.gamesContentBefore.concat($scope.games.content);
 
             $scope.showElements = true;
@@ -47,9 +46,6 @@ angular.module('starter')
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             });
         }, 1000);
-
-
-
     }
 
 })

@@ -12,6 +12,7 @@ var options = {
 };
 
 //app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(bodyParser.json());
 app.use("/", require("./web/index.js"));
 

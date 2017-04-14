@@ -3,7 +3,7 @@ var User = require('../../../../models/User.js');
 var hash = require('../../../../helpers/hash.js');
 
 router.get('/checkUsername', function(req, res) {
-    var name = req.query.name;
+    var name = req.query.username;
     if (typeof name != 'undefined') {
         User.findOne({ username: name }, function(err, user) {
             if (user) {
@@ -43,7 +43,7 @@ router.post('/', function(req, res) {
                     password: hashedPassword,
                     gameList: gameList
                 }).save().then(function(userSaved) {
-                    res.json(userSaved);
+                    res.status(200).json({message:"user saved with success!"});
                 });
             }
         });
