@@ -5,6 +5,20 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic', 'ionic-ratings'])
 
+.factory('sessionService',['$http',function($http){
+return {
+   set: function(key,value){
+      return localStorage.setItem(key,JSON.stringify(value));
+   },
+   get: function(key){
+     return JSON.parse(localStorage.getItem(key));
+   },
+   destroy: function(key){
+     return localStorage.removeItem(key);
+   },
+ };
+}])
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {

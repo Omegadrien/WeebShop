@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('LoginController', function($scope, $http, $ionicLoading, $location) {
+.controller('LoginController', function($scope, $http, $ionicLoading, $location, sessionService) {
 
     var login = function() {
         $http({
@@ -9,7 +9,8 @@ angular.module('starter')
             data: {'username':$scope.usernameSelect, 'password':$scope.passwordSelect}
 
         }).then(function success (response) {
-            console.log(response.data.token);
+            sessionService.set("token", response.data.token);
+            $location.path('/home');
 
         }, function fail(response) {
             console.log("fail: " + response.data.message);

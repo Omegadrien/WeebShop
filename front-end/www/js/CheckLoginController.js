@@ -1,21 +1,12 @@
 angular.module('starter')
-.controller('CheckLoginController', function($scope, $http, $ionicLoading, $location) {
-
-    $scope.boolGoToLogin = true;
-    $scope.showTab = false;
+.controller('CheckLoginController', function($scope, $http, $ionicLoading, $location, sessionService) {
 
     $scope.goToLogin = function () {
-        if ($scope.boolGoToLogin) {
+        if (sessionService.get("token") === null) {
             $location.path('/login');
         }
-        else {
-            $scope.showTab = true;
-            $location.path('/home');
-        }
-
     }
 
     $scope.goToLogin();
-
 
 })

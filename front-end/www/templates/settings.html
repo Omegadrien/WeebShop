@@ -1,5 +1,12 @@
 <ion-view>
-    <ion-content>
-        <h2>Settings</h2>
+    <ion-content ng-controller="CheckLoginController">
+        <ion-list ng-controller="SettingsController">
+            <h2>Settings</h2>
+            <p>
+                Token: {{ token }}
+            </p>
+
+            <button ng-click="logoutButtonClicked()">Log out</button>
+        </ion-list>
     </ion-content>
 </ion-view>
