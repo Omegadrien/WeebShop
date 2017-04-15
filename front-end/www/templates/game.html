@@ -38,20 +38,46 @@
 
             <div class="row">
                 <div class="col col-33">
-                    <img class="col col-center" src="{{ game.screenshotUrl[0].upper }}" class="responsive-sm">
-                    <img class="col col-center" src="{{ game.screenshotUrl[0].lower }}" class="responsive-sm">
+                    <img ng-click="seeImage(game.screenshotUrl[0].upper)" class="col col-center" src="{{ game.screenshotUrl[0].upper }}" class="responsive-sm">
+                    <img ng-click="seeImage(game.screenshotUrl[0].lower)" class="col col-center" src="{{ game.screenshotUrl[0].lower }}" class="responsive-sm">
                 </div>
                 <div class="col col-33">
-                    <img class="col col-center" src="{{ game.screenshotUrl[1].upper }}" class="responsive-sm">
-                    <img class="col col-center" src="{{ game.screenshotUrl[1].lower }}" class="responsive-sm">
+                    <img ng-click="seeImage(game.screenshotUrl[1].upper)" class="col col-center" src="{{ game.screenshotUrl[1].upper }}" class="responsive-sm">
+                    <img ng-click="seeImage(game.screenshotUrl[1].lower)" class="col col-center" src="{{ game.screenshotUrl[1].lower }}" class="responsive-sm">
                 </div>
                 <div class="col col-33">
-                    <img class="col col-center" src="{{ game.screenshotUrl[2].upper }}" class="responsive-sm">
-                    <img class="col col-center" src="{{ game.screenshotUrl[2].lower }}" class="responsive-sm">
+                    <img ng-click="seeImage(game.screenshotUrl[2].upper)" class="col col-center" src="{{ game.screenshotUrl[2].upper }}" class="responsive-sm">
+                    <img ng-click="seeImage(game.screenshotUrl[2].lower)" class="col col-center" src="{{ game.screenshotUrl[2].lower }}" class="responsive-sm">
                 </div>
             </div>
 
             <p class="col col-center" ng-bind-html="game.description"></p>
+
+            <!-- Videos -->
+            <div ng-show="game.movie.length > 0">
+
+                <h4>Video(s):</h4>
+                <div ng-repeat="n in [].constructor(game.movie.length) track by $index">
+                    <div class="col">
+                        <a class="item col-center">
+                            <div class="col item-text-wrap">
+                                <h2 ng-bind-html="game.movie[$index].name" ></h2>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <img  src="{{game.movie[$index].bannerUrl}}" class="responsive-sm">
+                                </div>
+                                <div class="col col-30">
+                                    <button class="button button-positive" ng-click="watchVideo(game.movie[$index].videoUrl)">See video</button>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
             <p>
                 Genre:
                 <div ng-repeat ="n in [].constructor(game.genre.length) track by $index">

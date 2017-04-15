@@ -28,11 +28,11 @@
             <div>
                 <h3>Wish list:</h3>
 
-                <div ng-if="listGames.length == 0">
+                <div ng-show="listGames.length == 0">
                     <p>Empty</p>
                 </div>
 
-                <div ng-repeat="n in [].constructor(listGames.length) track by $index">
+                <div ng-show="listGames.length > 0" ng-repeat="n in [].constructor(listGames.length) track by $index">
                     <div class="col">
                         <a class="item col-center">
                             <div class="col item-text-wrap">

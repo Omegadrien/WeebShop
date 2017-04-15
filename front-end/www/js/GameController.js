@@ -128,4 +128,12 @@ angular.module('starter')
         window.open($scope.downloadUrl);
     }
 
+    $scope.watchVideo = function(url) {
+        window.open(url);
+    }
+
+    $scope.seeImage = function(url) {
+        window.open(url);
+    }
+
 })
