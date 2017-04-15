@@ -3,6 +3,7 @@
         <ion-list ng-controller="SettingsController" ng-show="showElements">
             <h2>Settings</h2>
             <button ng-click="logoutButtonClicked()">Log out</button>
+            <button ng-click="reloadWishList()">Reload wishList</button>
 
             <div class="isAdmin" ng-show="isAdmin">
                 <p>You're admin, you can disable user account!</p>

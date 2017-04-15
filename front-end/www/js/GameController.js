@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('GameController', function($scope, $http, $ionicLoading, $stateParams, $q, sessionService) {
+.controller('GameController', function($scope, $http, $ionicLoading, $stateParams, $q, $ionicPopup, sessionService) {
 
     $scope.showElements = false;
     $scope.showRating = false;
@@ -84,6 +84,44 @@ angular.module('starter')
          $scope.ratingsCallback(rating, index);
        }
      };
+
+     $scope.addToGameList = function () {
+         $http({
+         url: "/api/user/secret/gameList/add",
+         method: "POST",
+         headers: {"Content-Type":"application/json", "Authorization":"JWT " + $scope.token},
+         data: {'name': $scope.game.name, 'id': $stateParams.id}
+
+         }).then(function success (response) {
+             $scope.isWishListed = true;
+             $ionicPopup.alert({
+                 title: 'Success',
+                 template: response.data
+            });
+
+         }, function fail(response) {
+             console.log("error, unable to add to gameList...");
+         })
+     }
+
+     $scope.removeFromGameList = function () {
+         $http({
+         url: "/api/user/secret/gameList/remove",
+         method: "POST",
+         headers: {"Content-Type":"application/json", "Authorization":"JWT " + $scope.token},
+         data: {'id': $stateParams.id}
+
+         }).then(function success (response) {
+             $scope.isWishListed = false;
+             $ionicPopup.alert({
+                 title: 'Success',
+                 template: response.data
+            });
+
+         }, function fail(response) {
+             console.log("error, unable to remove from gameList...");
+         })
+     }
 
 
     $scope.goToDownloadPage = function() {

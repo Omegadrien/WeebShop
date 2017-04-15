@@ -126,4 +126,12 @@ angular.module('starter')
          $scope.showConfirm(id);
     }
 
+    $scope.reloadWishList = function() {
+        getUserGameList();
+        $ionicPopup.alert({
+            title: 'Success',
+            template: 'Wish list reloaded!'
+       });
+    }
+
 })

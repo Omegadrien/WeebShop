@@ -30,7 +30,7 @@ router.post("/add", passport.authenticate('jwt', { session: false }), function(r
               if (err) throw err;
             });
 
-            res.status(200).json("add done!");
+            res.status(200).json("Game added to your wish list!");
       }
       else {
           res.status(400).json({message:"error, already added"});
@@ -63,13 +63,13 @@ router.post("/remove", passport.authenticate('jwt', { session: false }), functio
                 if (err) throw err;
               });
 
-              res.status(200).json("remove done!");
+              res.status(200).json("Game removed from your wish list!");
 
         }
         else {
             res.status(400).json({message:"error, bad id"});
         }
-        
+
     }
     else {
         res.status(400).json({message:"error, bad request"});

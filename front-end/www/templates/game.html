@@ -29,8 +29,8 @@
                     <p>Votes: {{ game.starRatingInfo.numberVote }}</p>
                 </div>
                 <div class="col col-20 col-center">
-                    <button ng-hide="isWishListed">Add to wish list</button>
-                    <button ng-show="isWishListed">Remove from wish list</button>
+                    <button ng-click="addToGameList()" ng-hide="isWishListed">Add to wish list</button>
+                    <button ng-click="removeFromGameList()" ng-show="isWishListed">Remove from wish list</button>
                 </div>
             </div>
 
