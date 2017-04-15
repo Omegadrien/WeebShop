@@ -21,12 +21,16 @@
             </div>
 
             <div class="row" ng-show="showRating">
-                <div class="col col-50">
+                <div class="col col-50 col-center">
                     <ionic-ratings ratingsobj='ratingsObject' index='0'></ionic-ratings>
                 </div>
-                <div class="col col-center">
+                <div class="col col-30 col-center">
                     <p>Score: {{ game.starRatingInfo.score * 20 | number:0 }}%</p>
                     <p>Votes: {{ game.starRatingInfo.numberVote }}</p>
+                </div>
+                <div class="col col-20 col-center">
+                    <button ng-hide="isWishListed">Add to wish list</button>
+                    <button ng-show="isWishListed">Remove from wish list</button>
                 </div>
             </div>
 

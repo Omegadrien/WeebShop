@@ -1,15 +1,17 @@
 angular.module('starter')
-.controller('GameController', function($scope, $http, $ionicLoading, $stateParams, $q) {
+.controller('GameController', function($scope, $http, $ionicLoading, $stateParams, $q, sessionService) {
 
     $scope.showElements = false;
     $scope.showRating = false;
+    $scope.isWishListed = false;
+    $scope.token = sessionService.get("token");
 
     $ionicLoading.show({
         template:'<ion-spinner icon="spiral"></ion-spinner>',
     }).then(function() {
 
         var reqGame = $http({
-            url: "/api/game/"+$stateParams.id,
+            url: "/api/game/"+ $stateParams.id,
             method: "GET"
         }).then(function success (response) {
             $scope.game = response.data;
@@ -41,7 +43,29 @@ angular.module('starter')
 
         });
 
-        $q.all([reqGame, reqPrice, reqDownload]).then( function() {
+        var checkIfGameIsWishListed = function () {
+            $http({
+            url: "/api/user/secret/gameList",
+            method: "GET",
+            headers: {"Content-Type":"application/json", "Authorization":"JWT " + $scope.token}
+
+            }).then(function success (response) {
+                $scope.listGames = response.data;
+
+                for (var index = 0; index < $scope.listGames.length; index++) {
+                    if ($scope.listGames[index][1] == $stateParams.id) {
+                        $scope.isWishListed = true;
+                        break;
+                    }
+                }
+
+
+            }, function fail(response) {
+                console.log("fail, maybe the user is unlogged..." + response.data.message);
+            })
+        }
+
+        $q.all([reqGame, reqPrice, reqDownload, checkIfGameIsWishListed()]).then( function() {
             $scope.showElements = true;
             $ionicLoading.hide();
         });

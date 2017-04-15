@@ -19,7 +19,6 @@ angular.module('starter')
     });
 
     $scope.buttonClicked = function (contentId) {
-        console.log("contentId=" + contentId);
         $location.path('/game/' + contentId);
     }
 

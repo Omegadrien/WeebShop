@@ -13,13 +13,10 @@ angular.module('starter')
 
         }).then(function success (response) {
             $scope.isAdmin = response.data.isAdmin;
-            console.log("isAdmin= " + $scope.isAdmin);
 
-
-            console.log("hello " + $scope.isAdmin);
             if ($scope.isAdmin == true) {
-                console.log("enter in is admin function...");
                 getUserList();
+                getUserGameList();
             }
             else {
                 getUserGameList();
@@ -47,7 +44,7 @@ angular.module('starter')
             $ionicLoading.hide();
 
         }, function fail(response) {
-            console.log("fail: totoland, maybe the user is unlogged..." + response.data.message);
+            console.log("fail, maybe the user is unlogged..." + response.data.message);
             $ionicLoading.hide();
         })
     }
