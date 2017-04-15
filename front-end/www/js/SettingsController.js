@@ -86,8 +86,10 @@ angular.module('starter')
             getUserList();
 
         }, function fail(response) {
-            console.log("fail to deleteUser");
-
+            $ionicPopup.alert({
+                title: 'Error',
+                template: 'Fail to disable the account.'
+           });
         })
     }
 
@@ -106,7 +108,6 @@ angular.module('starter')
     }
 
     $scope.buttonClicked = function (contentId) {
-        console.log("contentId=" + contentId);
         $location.path('/game/' + contentId);
     }
 

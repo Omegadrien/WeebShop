@@ -1,7 +1,11 @@
 <ion-view>
     <ion-content ng-controller="GameListController" ng-show="showElements">
         <ion-list>
-            <h2>gameList (results: {{ games.total }})</h2>
+            <h2>Research results</h2>
+
+            <h3 ng-show="games.total == 0">No games found... Try again! :)</h3>
+            <h3 ng-show="games.total == 1">Found 1 game.</h3>
+            <h3 ng-show="games.total > 1">Found {{ games.total }} games.</h3>
 
             <div ng-repeat="n in [].constructor(games.content.length) track by $index">
                 <div class="col">

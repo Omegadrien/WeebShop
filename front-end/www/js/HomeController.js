@@ -13,14 +13,13 @@ angular.module('starter')
                 $scope.home = response.data;
                 $scope.showElements = true;
                 $ionicLoading.hide();
-                
+
             }, function fail(response) {
 
             })
         });
 
     $scope.buttonClicked = function (directoryId) {
-        console.log(directoryId);
         $location.path('/directory/'+ directoryId);
     }
 
