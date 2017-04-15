@@ -61,6 +61,7 @@ If the name and the password are OK, you will receive a token.
 Add in the header "Authorization : JWT {token}".
 
 https://localhost:3000/api/user/secret/ -> let you notice that your token is OK.
+https://localhost:3000/api/user/secret/isAdmin -> returns true if you're an admin, or false if you're a user.
 
 #### Game list
 

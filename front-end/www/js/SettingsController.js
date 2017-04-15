@@ -1,22 +1,85 @@
 angular.module('starter')
-.controller('SettingsController', function($scope, $http, $ionicLoading, $location, $state, sessionService) {
+.controller('SettingsController', function($scope, $http, $ionicLoading, $location, $state, $q, sessionService) {
 
     $scope.token = sessionService.get("token");
+    $scope.showElements = false;
+    $scope.isAdmin = false;
 
-    $http({
+    var getIsAdmin = function () {
+        $http({
+        url: "/api/user/secret/isAdmin",
+        method: "GET",
+        headers: {"Content-Type":"application/json", "Authorization":"JWT " + $scope.token}
+
+        }).then(function success (response) {
+            $scope.isAdmin = response.data.isAdmin;
+            console.log("isAdmin= " + $scope.isAdmin);
+
+
+            console.log("hello " + $scope.isAdmin);
+            if ($scope.isAdmin == true) {
+                console.log("enter in is admin function...");
+                getUserList();
+            }
+            else {
+                getUserGameList();
+            }
+
+
+
+        }, function fail(response) {
+            console.log("fail get isAdmin " + response.data);
+            $scope.showElements = true;
+            $ionicLoading.hide();
+        })
+    }
+
+    var getUserGameList = function () {
+        $http({
         url: "/api/user/secret/gameList",
         method: "GET",
-        headers: {"Content-Type":"application/json", "Authorization":"JWT " + $scope.token},
-        data: {'username':$scope.usernameSelect, 'password':$scope.passwordSelect}
+        headers: {"Content-Type":"application/json", "Authorization":"JWT " + $scope.token}
 
-    }).then(function success (response) {
-        $scope.listGames = response.data;
-        console.log($scope.listGames.length);
+        }).then(function success (response) {
+            $scope.listGames = response.data;
+
+            $scope.showElements = true;
+            $ionicLoading.hide();
+
+        }, function fail(response) {
+            console.log("fail: totoland, maybe the user is unlogged..." + response.data.message);
+            $ionicLoading.hide();
+        })
+    }
+
+    var getUserList = function() {
+        $http({
+            url: "api/user/secret/admin/getUserList",
+            method: "GET",
+            headers: {"Content-Type":"application/json", "Authorization":"JWT " + $scope.token}
+        }).then(function success (response) {
+            $scope.userList = response.data;
+
+            console.log("getUserList= " + $scope.userList.length);
+
+            $scope.showElements = true;
+            $ionicLoading.hide();
+
+        }, function fail(response) {
+            console.log("fail admin getUserList");
+            $ionicLoading.hide();
+        })
+    }
+
+    $ionicLoading.show({
+        template:'<ion-spinner icon="spiral"></ion-spinner>',
+    }).then(function() {
+
+        getIsAdmin();
+    });
 
 
-    }, function fail(response) {
-        console.log("fail: " + response.data.message);
-    })
+
 
     $scope.logoutButtonClicked = function() {
         //logout

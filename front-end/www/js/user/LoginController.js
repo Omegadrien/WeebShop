@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('LoginController', function($scope, $http, $location, sessionService) {
+.controller('LoginController', function($scope, $http, $location, $ionicLoading, sessionService) {
 
     var login = function() {
         $http({

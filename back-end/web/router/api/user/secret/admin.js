@@ -6,10 +6,10 @@ router.get("/getUserList", passport.authenticate('jwt', { session: false }), fun
     if (req.user.isAdmin) {
 
         User.find({}, function(err, users) {
-            var userMap = {};
+            var userMap = [];
 
             users.forEach(function(user) {
-              userMap[user._id] = user;
+              userMap.push(user);
             });
 
             res.status(200).json(userMap);
