@@ -4,9 +4,9 @@
             <h2>Settings</h2>
             <button ng-click="logoutButtonClicked()">Log out</button>
 
-            <h3>BookMarked</h3>
-
             <div class="isUser" ng-hide="isAdmin">
+
+                <h3>BookMarked</h3>
 
                 <div ng-if="listGames.length == 0">
                     <p>Empty</p>
@@ -28,9 +28,21 @@
             </div>
 
             <div class="isAdmin" ng-show="isAdmin">
-                <p>
-                    You're admin
-                </p>
+                <p>You're admin</p>
+
+                <div ng-repeat="n in [].constructor(userList.length) track by $index">
+                    <div class="col">
+                        <a class="item col-center">
+                            <div class="col item-text-wrap">
+                                <h2 ng-bind-html="userList[$index].username" ></h2>
+                            </div>
+
+                            <button ng-show="userList[$index].isActivated" class="button button-positive" ng-click="buttonDisableClicked(userList[$index]._id)" ui-sref="game">Disable account</button>
+
+                        </a>
+                    </div>
+                </div>
+
             </div>
 
         </ion-list>

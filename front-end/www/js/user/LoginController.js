@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('LoginController', function($scope, $http, $location, $ionicLoading, sessionService) {
+.controller('LoginController', function($scope, $http, $location, $ionicLoading, $ionicPopup, sessionService) {
 
     var login = function() {
         $http({
@@ -13,7 +13,11 @@ angular.module('starter')
             $location.path('/home');
 
         }, function fail(response) {
-            console.log("fail: " + response.data.message);
+            $ionicPopup.alert({
+             title: 'Error',
+             template: response.data.message
+           });
+
         })
     }
 

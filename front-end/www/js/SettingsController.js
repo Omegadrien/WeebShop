@@ -1,5 +1,5 @@
 angular.module('starter')
-.controller('SettingsController', function($scope, $http, $ionicLoading, $location, $state, $q, sessionService) {
+.controller('SettingsController', function($scope, $http, $ionicLoading, $location, $state, $q, $ionicPopup, sessionService) {
 
     $scope.token = sessionService.get("token");
     $scope.showElements = false;
@@ -71,14 +71,32 @@ angular.module('starter')
         })
     }
 
+    var deleteUser = function(id) {
+        $http({
+            url: "api/user/secret/admin/deleteUser",
+            method: "POST",
+            headers: {"Content-Type":"application/json", "Authorization":"JWT " + $scope.token},
+            data: {"id": id}
+        }).then(function success (response) {
+            $ionicPopup.alert({
+                title: 'Success',
+                template: 'That account have been disabled with success!'
+           });
+
+            getUserList();
+
+        }, function fail(response) {
+            console.log("fail to deleteUser");
+
+        })
+    }
+
     $ionicLoading.show({
         template:'<ion-spinner icon="spiral"></ion-spinner>',
     }).then(function() {
 
         getIsAdmin();
     });
-
-
 
 
     $scope.logoutButtonClicked = function() {
@@ -90,6 +108,24 @@ angular.module('starter')
     $scope.buttonClicked = function (contentId) {
         console.log("contentId=" + contentId);
         $location.path('/game/' + contentId);
+    }
+
+    // confirm if disable account
+     $scope.showConfirm = function(id) {
+       var confirmPopup = $ionicPopup.confirm({
+         title: 'Confirmation',
+         template: 'Are you sure you want to disable this account?'
+       });
+
+       confirmPopup.then(function(res) {
+           if(res) {
+               deleteUser(id);
+           }
+       });
+     };
+
+    $scope.buttonDisableClicked = function (id) {
+         $scope.showConfirm(id);
     }
 
 })
