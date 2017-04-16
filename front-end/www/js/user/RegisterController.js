@@ -15,7 +15,7 @@ angular.module('starter')
                 template: 'Your account is now registered!'
            });
 
-            $location.path('/home');
+            $location.path('/login');
 
         }, function fail(response) {
             $ionicPopup.alert({
