@@ -23,7 +23,7 @@ function callback(error, response, body) {
         var info = JSON.parse(body);
 
         if (info.title_ec_info.disable_download = "false") {
-            infoToReturn("http://ccs.cdn.c.shop.nintendowifi.net/ccs/download/" + info.title_ec_info.title_id + "/00000000");
+            infoToReturn("http://ccs.cdn.c.shop.nintendowifi.net/ccs/download/" + info.title_ec_info.title_id + "/00000000"); // we need to parse the /tmd file to know what content we need to download. Here, we just try to download the content 00000000.
         }
         else {
             infoToReturn("Error, not available.");

@@ -22,8 +22,6 @@ angular.module('starter')
                 getUserGameList();
             }
 
-
-
         }, function fail(response) {
             console.log("fail get isAdmin " + response.data);
             $scope.showElements = true;
@@ -99,7 +97,6 @@ angular.module('starter')
 
 
     $scope.logoutButtonClicked = function() {
-        //logout
         sessionService.destroy("token");
         window.location.reload();
     }
@@ -126,12 +123,5 @@ angular.module('starter')
          $scope.showConfirm(id);
     }
 
-    $scope.reloadWishList = function() {
-        getUserGameList();
-        $ionicPopup.alert({
-            title: 'Success',
-            template: 'Wish list reloaded!'
-       });
-    }
 
 })

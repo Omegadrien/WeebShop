@@ -1,5 +1,7 @@
 angular.module('starter')
-.controller('LoginController', function($scope, $http, $location, $ionicLoading, $ionicPopup, sessionService) {
+.controller('LoginController', function($scope, $http, $location, $ionicLoading, $ionicPopup, $ionicHistory, sessionService) {
+
+    $ionicHistory.clearHistory();
 
     var login = function() {
         $http({

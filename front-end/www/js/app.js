@@ -59,6 +59,7 @@ return {
         })
         .state('settings', {
             url: '/settings',
+            cache: false,
             templateUrl: 'templates/settings.html'
         })
         .state('directory', {
