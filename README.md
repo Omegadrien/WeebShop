@@ -1,7 +1,7 @@
 # WeebShop
 
 WeebShop is a web app for your smartphone, that displays the eShop.
-You can check games information (images, description, videos, etc), add a game in your wish list, and download them.
+You can check games information (images, description, videos, etc), add games in your wish list, and download them.
 
 You need to place the ctr-common-1.crt and ctr-common-1.key files in the back-end/keys folder.
 Follow these instructions to get those files: https://github.com/SciresM/ccrypt
@@ -65,11 +65,11 @@ If the name and the password are OK, you will receive a token.
 Add in the header "Authorization : JWT {token}".
 
 https://localhost:3000/api/user/secret/ -> let you notice that your token is OK.
-https://localhost:3000/api/user/secret/isAdmin -> returns true if you're an admin, or false if you're a user.
+https://localhost:3000/api/user/secret/isAdmin -> get true if you're an admin, or false if you're a user.
 
 #### Game list
 
-https://localhost:3000/api/user/secret/gameList -> Returns the list of games that the user have bookmarked.
+https://localhost:3000/api/user/secret/gameList -> get the list of games that the user have bookmarked.
 
 https://localhost:3000/api/user/secret/gameList/add -> post the "name" and "id" (contentId) of the game you want to add to the list.
 
@@ -93,7 +93,7 @@ You'll find a backed-up database, in the backupDB folder, at the root of the Wee
 To import that database, select "BSON - mongodump folder". The folder to select is "backupDB".
 In that DB, there is 3 users accounts and an admin account. Here's the usernames and passwords:
 
-- User 1: username="user1", password="user1"
+- User 1: username="user", password="user"
 - User 2: username="user2", password="user2"
 - User 3: username="user3", password="user3"
 - Admin: username="admin", password="admin"
@@ -111,16 +111,18 @@ You have to enter those usernames and passwords, without the "".
 
 ## More info about eShop
 
-If you want to learn more about the eShop, you can take a look at those links:
+If you want to learn more about the eShop, you can take a look at these links:
 - http://pastebin.com/qiyvkj0Z
 - https://3dbrew.org/wiki/EShop
 - https://3dbrew.org/wiki/Title_metadata
 - https://github.com/Plailect/PlaiCDN
 - https://notabug.org/btucker/freeShop
 
-Those content help me to understand how nintento shop server works.
+These contents help me to understand how the nintendo eshop works.
 
 ### Thanks
 
-I would like to thanks: Reisyukaku, 3dsguy, Vgturtle127, SciresM, TheCruel, Yellows8, WulfyStylez, Steveice10, Plailect, Larsenv, Einstein95, Neimod, Smea,
-and all others, for their work (reverse engineering and share their discoveries).
+-I would like to thanks: Reisyukaku, 3dsguy, Vgturtle127, SciresM, TheCruel, Yellows8, WulfyStylez, Steveice10, Plailect, Larsenv, Einstein95, Neimod, Smea,
+and all the others, for their work (reverse engineering and share their discoveries).
+
+- Image: http://maxpixel.freegreatpicture.com/Retail-Travel-Buy-Bag-Isolated-Merchandise-Market-1623898

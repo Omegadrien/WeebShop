@@ -10,3 +10,14 @@
   .ionic_ratings .icon {
    font-size: 200%;
  }
+
+h2 {
+     text-align: center
+ }
+
+ .imgBagShop {
+   max-width:30%;
+   max-height:30%;
+   display: block;
+   margin: 0 auto;
+ }

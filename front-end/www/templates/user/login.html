@@ -1,6 +1,12 @@
 <ion-view>
     <ion-content ng-controller="LoginController">
         <ion-list>
+            <h2>Welcome to WeebShop!</h2>
+
+            <img class="imgBagShop" src="img/bagShop.png" />
+
+            <hr>
+
             <h2>Login</h2>
             <div class="list">
                 <label class="item item-input">
@@ -15,7 +21,7 @@
 
             <button ng-click="loginButtonClicked()" class="button button-block button-positive">Log in</button>
 
-            <button ng-click="registerGoButtonClicked()">Create account</button>
+            <button ng-click="registerGoButtonClicked()" class="button button-block">Create an account</button>
         </ion-list>
     </ion-content>
 </ion-view>

@@ -3,6 +3,9 @@
         <ion-list ng-controller="DirectoryController" ng-show="showElements">
             <h2>{{ directory.directoryName }}</h2>
             <img  src="{{directory.directoryBannerUrl}}" class="responsive-sm">
+            <p>
+                {{ directory.description }} <!-- rarely available -->
+            </p>
             <div ng-repeat="n in [].constructor(directory.content.length) track by $index">
                 <div class="col">
                     <a class="item col-center">
