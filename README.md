@@ -105,7 +105,7 @@ You have to enter those usernames and passwords, without the "".
 - It doesn't work : Try to restart the database (MondoDB), the nodeJS app, and the ionic server. Don't forget to place the cert and the key files on the "keys" folder (more information above).
 - The images / videos doesn't display: The images and videos are stored in a server called "https://kanzashi-wup.cdn.nintendo.net/" and "https://kanzashi-movie-wup.cdn.nintendo.net". You have to add an exception, to accept connections from that server.
 
-## Know issue
+## known issue
 
 - When you click on the download button, sometimes you will have an error 404, because the content was not found. When the download link is generated, it always try to download the content "00000000". In fact, we have to download and parse a file named "tmd", that give us the number and the name of contents to download. To get that tmd file, just replace the content "00000000" by "tmd".
 
