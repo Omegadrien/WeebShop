@@ -105,18 +105,18 @@ You have to enter those usernames and passwords, without the "".
 - It doesn't work : Try to restart the database (MondoDB), the nodeJS app, and the ionic server. Don't forget to place the cert and the key files on the "keys" folder (more information above).
 - The images / videos doesn't display: The images and videos are stored in a server called "https://kanzashi-wup.cdn.nintendo.net/" and "https://kanzashi-movie-wup.cdn.nintendo.net". You have to add an exception, to accept connections from that server.
 
-## Know bug
+## Know issue
 
 - When you click on the download button, sometimes you will have an error 404, because the content was not found. When the download link is generated, it always try to download the content "00000000". In fact, we have to download and parse a file named "tmd", that give us the number and the name of contents to download. To get that tmd file, just replace the content "00000000" by "tmd".
 
 ## More info about eShop
 
 If you want to learn more about the eShop, you can take a look at those links:
-http://pastebin.com/qiyvkj0Z
-https://3dbrew.org/wiki/EShop
-https://3dbrew.org/wiki/Title_metadata
-https://github.com/Plailect/PlaiCDN
-https://notabug.org/btucker/freeShop
+- http://pastebin.com/qiyvkj0Z
+- https://3dbrew.org/wiki/EShop
+- https://3dbrew.org/wiki/Title_metadata
+- https://github.com/Plailect/PlaiCDN
+- https://notabug.org/btucker/freeShop
 
 Those content help me to understand how nintento shop server works.
 
