@@ -59,7 +59,6 @@ angular.module('starter')
                     }
                 }
 
-
             }, function fail(response) {
                 console.log("fail, maybe the user is unlogged..." + response.data.message);
             })
@@ -69,7 +68,6 @@ angular.module('starter')
             $scope.showElements = true;
             $ionicLoading.hide();
         });
-
     });
 
     $scope.ratingsObject = {

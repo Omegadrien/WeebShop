@@ -22,5 +22,4 @@ angular.module('starter')
     $scope.buttonClicked = function (directoryId) {
         $location.path('/directory/'+ directoryId);
     }
-
 })

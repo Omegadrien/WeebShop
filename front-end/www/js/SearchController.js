@@ -10,7 +10,6 @@ angular.module('starter')
 
     })
 
-
     $scope.resetButtonClicked = function() {
         $scope.platformSelect="0";
         $scope.genreSelect="0";
@@ -73,5 +72,4 @@ angular.module('starter')
         $location.path('/gameList/' + url);
 
     }
-
 })

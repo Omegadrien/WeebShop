@@ -78,5 +78,4 @@ return {
             url: '/',
             templateUrl: 'templates/home.html'
         })
-
 })

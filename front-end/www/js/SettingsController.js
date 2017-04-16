@@ -55,8 +55,6 @@ angular.module('starter')
         }).then(function success (response) {
             $scope.userList = response.data;
 
-            console.log("getUserList= " + $scope.userList.length);
-
             $scope.showElements = true;
             $ionicLoading.hide();
 
@@ -122,6 +120,5 @@ angular.module('starter')
     $scope.buttonDisableClicked = function (id) {
          $scope.showConfirm(id);
     }
-
 
 })
